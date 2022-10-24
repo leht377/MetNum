@@ -1,34 +1,48 @@
-def reglaFalsa(f, a, b, tol):
-    n = 0
-    yA = f(a)
-    yB = f(b)
-    xi = a + (yA * (a - b) / (yB - yA))
-    dif = xi * 100
-    yi = f(xi)
 
-    while abs(dif) > tol:
-        n += 1
-        if yi == 0:
-            print("Se ha alcanzado el cero exacto \n")
-        elif yB * yi > 0:  # La raÃ­z estÃ¡ en [a,c]
-            b = xi
-            yB = yi
-        else:  # La raÃ­z estÃ¡ en [c,b]
-            a = xi
-            yA = yi
+def reglaFalsa(f, intervaloA, intervaloB, tolerancia):
 
-        xAnterior = xi
-        xi = a + (yA * (a - b) / (yB - yA))
-        yi = f(xi)
-        dif = (xi - xAnterior) / xi * 100
+    iteraciones = 0
 
-    return {"caprox": xi, "err": abs(dif), "numiter": n}
+    f_de_intervaloA = f(intervaloA)
+    f_de_intervaloB = f(intervaloB)
+
+    aproxNueva = intervaloA + \
+        (f_de_intervaloA * (intervaloA - intervaloB) /
+         (f_de_intervaloB - f_de_intervaloA))
+
+    f_de_aproxNueva = f(aproxNueva)
+    errorRelativo = 1000
+
+    while (errorRelativo >= tolerancia):
+        iteraciones += 1
+
+        if f_de_intervaloA * f_de_aproxNueva == 0:
+            break
+
+        if f_de_aproxNueva < 0:
+            intervaloA = aproxNueva
+            f_de_intervaloA = f_de_aproxNueva
+
+        elif f_de_aproxNueva > 0:
+            intervaloB = aproxNueva
+            f_de_intervaloB = f_de_aproxNueva
+
+        aproxAnterior = aproxNueva
+        aproxNueva = intervaloA + \
+            (f_de_intervaloA * (intervaloA - intervaloB) /
+             (f_de_intervaloB - f_de_intervaloA))
+
+        f_de_aproxNueva = f(aproxNueva)
+        errorRelativo = abs((aproxNueva - aproxAnterior) / aproxNueva * 100)
+
+    return {"Raiz aproximada": aproxNueva, "Error": errorRelativo, "Iteraciones": iteraciones}
 
 
-f = lambda x: x**2 + 3 * x - 34
+def f(x): return x**2 + 3 * x - 34
+
+
 a = 3
 b = 5
 tol = 10**-2
-
 
 print(reglaFalsa(f, a, b, tol))
