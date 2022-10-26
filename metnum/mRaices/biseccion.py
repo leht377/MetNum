@@ -1,5 +1,3 @@
-
-
 # def biseccion(f, a, b, tol, plot=False) -> object:
 
 #     n = 1
@@ -48,7 +46,9 @@
 
 
 # @args_type_checking
-def biseccion(f, intervaloA: int or float, intervaloB: int or float, tolerancia: float or int) -> tuple:
+def biseccion(
+    f, intervaloA: int or float, intervaloB: int or float, tolerancia: float or int
+) -> tuple:
     """
     Esta funcion entrega el valor aproximado de una raíz que esta en la función continua f(x)
 
@@ -57,10 +57,10 @@ def biseccion(f, intervaloA: int or float, intervaloB: int or float, tolerancia:
 
     f : function
         funcion f(x)
-    intervaloA : float or int  
+    intervaloA : float or int
         Primer extremo del intervalo donde se encuentra la raíz [intervaloA , ... ]
     intervaloB : float or int
-        Segundo extremo del intervalo donde se encuentra la raíz [..., intervaloB]       
+        Segundo extremo del intervalo donde se encuentra la raíz [..., intervaloB]
     tolerancia : float or int
         Tolerancia maxima con la cual se acepta la aproximación de la raíz
 
@@ -72,9 +72,9 @@ def biseccion(f, intervaloA: int or float, intervaloB: int or float, tolerancia:
     aproxNueva : float
         Valor aproximado de la raíz
     errorRelativo : float
-        Error relativo de la raiz aproximada encontrada 
+        Error relativo de la raiz aproximada encontrada
     iteraciones : int
-        Numero de iteracciones necesarias para encontrar la raiz aproximada 
+        Numero de iteracciones necesarias para encontrar la raiz aproximada
 
     Ejemplos
     ----------
@@ -88,11 +88,40 @@ def biseccion(f, intervaloA: int or float, intervaloB: int or float, tolerancia:
     (-0.4263026714324951, 5.592706663094791e-07, 21)
     """
 
-    if (f(intervaloA) * f(intervaloB) > 0):
-        raise (
-            f'No hay raiz en el intervalo [{intervaloA}, {intervaloB}]')
+    if not callable(f):
+        raise TypeError("El objeto no es invocable")
 
-    aproxNueva = ((intervaloA + intervaloB) / 2)
+    if not isinstance(
+        (intervaloA),
+        (
+            int,
+            float,
+        ),
+    ):
+        raise TypeError("El intervaloA debe ser de tipo int o float")
+
+    if not isinstance(
+        (intervaloB),
+        (
+            int,
+            float,
+        ),
+    ):
+        raise TypeError("El intervaloB debe ser de tipo int o float")
+
+    if not isinstance(
+        (tolerancia),
+        (
+            int,
+            float,
+        ),
+    ):
+        raise TypeError("La tolerancia debe ser de tipo int o float")
+
+    if f(intervaloA) * f(intervaloB) > 0:
+        raise (f"No hay raiz en el intervalo [{intervaloA}, {intervaloB}]")
+
+    aproxNueva = (intervaloA + intervaloB) / 2
     errorRelativo = 1000
     iteraciones = 0
 
@@ -101,20 +130,20 @@ def biseccion(f, intervaloA: int or float, intervaloB: int or float, tolerancia:
     f_de_intervaloB = f(intervaloB)
 
     while errorRelativo > tolerancia:
-        if (f_de_intervaloA * f_de_aproxNueva == 0):  # Se encontro la raíz exacta
+        if f_de_intervaloA * f_de_aproxNueva == 0:  # Se encontro la raíz exacta
             break
         # La raíz  esta en [aproxNueva, intervaloB]
-        if (f_de_intervaloB * f_de_aproxNueva < 0):
+        if f_de_intervaloB * f_de_aproxNueva < 0:
             intervaloA = aproxNueva
             f_de_intervaloA = f_de_aproxNueva
 
         # La raíz  esta en [intervaloA, aproxNueva]
-        elif (f_de_intervaloB * f_de_aproxNueva > 0):
+        elif f_de_intervaloB * f_de_aproxNueva > 0:
             intervaloB = aproxNueva
             f_de_intervaloB = f_de_aproxNueva
 
         aproxAnterior = aproxNueva
-        aproxNueva = ((intervaloA + intervaloB) / 2)
+        aproxNueva = (intervaloA + intervaloB) / 2
         f_de_aproxNueva = f(aproxNueva)
         errorRelativo = abs((aproxNueva - aproxAnterior) / aproxNueva)
 
