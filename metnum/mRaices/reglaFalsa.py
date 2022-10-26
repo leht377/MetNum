@@ -36,13 +36,3 @@ def reglaFalsa(f, intervaloA, intervaloB, tolerancia):
         errorRelativo = abs((aproxNueva - aproxAnterior) / aproxNueva * 100)
 
     return {"Raiz aproximada": aproxNueva, "Error": errorRelativo, "Iteraciones": iteraciones}
-
-
-def f(x): return x**2 + 3 * x - 34
-
-
-a = 3
-b = 5
-tol = 10**-2
-
-print(reglaFalsa(f, a, b, tol))
