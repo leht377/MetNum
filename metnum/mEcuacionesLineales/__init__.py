@@ -1,1 +1,0 @@
-from .gaussseidel import gaussseidel
