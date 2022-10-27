@@ -43,6 +43,7 @@
 #             return fn(*args)
 #         raise ValueError("Todos los argumentos deben ser enteros o floats")
 #     return wrapper
+# from .decoradores import args_type_checking
 
 
 # @args_type_checking
@@ -87,36 +88,6 @@ def biseccion(
     >>> biseccion (lambda x : x + exp(2 * x), -1, 0, 10**-6)
     (-0.4263026714324951, 5.592706663094791e-07, 21)
     """
-
-    if not callable(f):
-        raise TypeError("El objeto no es invocable")
-
-    if not isinstance(
-        (intervaloA),
-        (
-            int,
-            float,
-        ),
-    ):
-        raise TypeError("El intervaloA debe ser de tipo int o float")
-
-    if not isinstance(
-        (intervaloB),
-        (
-            int,
-            float,
-        ),
-    ):
-        raise TypeError("El intervaloB debe ser de tipo int o float")
-
-    if not isinstance(
-        (tolerancia),
-        (
-            int,
-            float,
-        ),
-    ):
-        raise TypeError("La tolerancia debe ser de tipo int o float")
 
     if f(intervaloA) * f(intervaloB) > 0:
         raise (f"No hay raiz en el intervalo [{intervaloA}, {intervaloB}]")
