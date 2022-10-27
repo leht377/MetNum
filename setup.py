@@ -3,20 +3,18 @@ from setuptools import find_packages, setup
 
 HERE = pathlib.Path(__file__).parent
 
-VERSION = '0.0.1' 
-PACKAGE_NAME = 'NombreLibreria' 
-AUTHOR = 'XXXX XXXXX'
-AUTHOR_EMAIL = 'XXX@gmail.com'
-URL = 'github url'
+VERSION = "0.0.1"
+PACKAGE_NAME = "metnum"
+AUTHOR = "XXXX XXXXX"
+AUTHOR_EMAIL = "XXX@gmail.com"
+URL = "github url"
 
-LICENSE = 'MIT'
-DESCRIPTION = 'Aquí debes incluir una descripción corta de la librería' 
-LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding='utf-8')
+LICENSE = "MIT"
+DESCRIPTION = "Aquí debes incluir una descripción corta de la librería"
+LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding="utf-8")
 LONG_DESC_TYPE = "text/markdown"
 
-INSTALL_REQUIRES = [
-      'listado de librerias'
-      ]
+INSTALL_REQUIRES = ["numpy"]
 
 setup(
     name=PACKAGE_NAME,
@@ -30,5 +28,5 @@ setup(
     install_requires=INSTALL_REQUIRES,
     license=LICENSE,
     packages=find_packages(),
-    include_package_data=True
+    include_package_data=True,
 )
