@@ -43,10 +43,10 @@
 #             return fn(*args)
 #         raise ValueError("Todos los argumentos deben ser enteros o floats")
 #     return wrapper
-# from .decoradores import args_type_checking
+from .decoradores import args_type_checking
 
 
-# @args_type_checking
+@args_type_checking
 def biseccion(
     f, intervaloA: int or float, intervaloB: int or float, tolerancia: float or int
 ) -> tuple:
@@ -90,7 +90,7 @@ def biseccion(
     """
 
     if f(intervaloA) * f(intervaloB) > 0:
-        raise (f"No hay raiz en el intervalo [{intervaloA}, {intervaloB}]")
+        raise ValueError(f"No hay raiz en el intervalo [{intervaloA}, {intervaloB}]")
 
     aproxNueva = (intervaloA + intervaloB) / 2
     errorRelativo = 1000
