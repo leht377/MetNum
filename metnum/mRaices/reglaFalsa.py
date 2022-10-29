@@ -1,3 +1,7 @@
+from .decoradores import args_type_checking
+
+
+@args_type_checking
 def reglaFalsa(
     f, intervaloA: int or float, intervaloB: int or float, tolerancia: int or float
 ) -> tuple:
@@ -36,36 +40,6 @@ def reglaFalsa(
     >>> regla falsa (lambda x: math.exp(3 * x) - 4, 0, 1, 10**-6)
     (0.46209811446609667, 8.567878429991425e-07, 35)
     """
-    if not callable(f):
-        raise TypeError("El objeto no es invocable")
-
-    if not isinstance(
-        (intervaloA),
-        (
-            int,
-            float,
-        ),
-    ):
-        raise TypeError("El intervaloA debe ser de tipo int o float")
-
-    if not isinstance(
-        (intervaloB),
-        (
-            int,
-            float,
-        ),
-    ):
-        raise TypeError("El intervaloB debe ser de tipo int o float")
-
-    if not isinstance(
-        (tolerancia),
-        (
-            int,
-            float,
-        ),
-    ):
-        raise TypeError("La tolerancia debe ser de tipo int o float")
-
     iteraciones = 0
 
     f_de_intervaloA = f(intervaloA)
