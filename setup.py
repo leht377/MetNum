@@ -5,9 +5,9 @@ HERE = pathlib.Path(__file__).parent
 
 VERSION = "0.0.1"
 PACKAGE_NAME = "metnum"
-AUTHOR = "XXXX XXXXX"
+AUTHOR = "DIEGO ALEJANDRO ESPINEL B , LUIS EDUARDO HERNANDEZ T"
 AUTHOR_EMAIL = "XXX@gmail.com"
-URL = "github url"
+URL = "https://github.com/leht377/metnum_base.git"
 
 LICENSE = "MIT"
 DESCRIPTION = "Aquí debes incluir una descripción corta de la librería"
