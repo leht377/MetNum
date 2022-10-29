@@ -12,13 +12,13 @@ def args_type_checking(fn):
             raise TypeError("El objeto no es invocable")
 
         if not isinstance(argumentos["intervaloA"], (int, float)):
-            raise TypeError("El intervaloA deben ser enteros o floats")
+            raise TypeError("El intervaloA deben ser entero o float")
 
         if not isinstance(argumentos["intervaloB"], (int, float)):
-            raise TypeError("El intervaloB deben ser enteros o floats")
+            raise TypeError("El intervaloB deben ser entero o float")
 
         if not isinstance(argumentos["tolerancia"], (int, float)):
-            raise TypeError("El intervaloC deben ser enteros o floats")
+            raise TypeError("La toleracia deben ser entero o float")
 
         return fn(*args)
 
