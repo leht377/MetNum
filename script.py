@@ -17,4 +17,20 @@ print(
 )
 print("SECANTE: ", secante(f, x0, x1, tolerancia, maxIteraciones))
 
-# print(mRaices.reglaFalsa(lambda x: math.exp(3 * x) - 4, 0, 1, 10**-6))
+
+# import numpy as np
+# import matplotlib.pyplot as plt
+
+
+# plt.figure(figsize=(6, 6))
+# x = np.linspace(-5, 5, 100)
+# plt.plot(x, x**2, "ko", label="quadratic")
+# plt.plot(x, x**3, "r*", label="cubic")
+# plt.title(f"Plot of Various Polynomials from {x[0]} to {x[-1]}")
+# plt.xlabel("X axis")
+# plt.ylabel("Y axis")
+# plt.legend(loc=2)
+# plt.xlim(-100, 100)
+# plt.ylim(-10, 10)
+# plt.grid()
+# plt.show()

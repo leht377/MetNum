@@ -1,9 +1,14 @@
 from .decoradores import args_type_checking
+from .plot import plot_biseccion
 
 
 @args_type_checking
 def biseccion(
-    f, intervaloA: int or float, intervaloB: int or float, tolerancia: float or int
+    f,
+    intervaloA: int or float,
+    intervaloB: int or float,
+    tolerancia: float or int,
+    plot: bool = False,
 ) -> tuple:
     """
     Esta funcion entrega el valor aproximado de una raíz que esta en la función continua f(x)
@@ -19,6 +24,8 @@ def biseccion(
         Segundo extremo del intervalo donde se encuentra la raíz [..., intervaloB]
     tolerancia : float or int
         Tolerancia maxima con la cual se acepta la aproximación de la raíz
+    (Opcional)  plot: bool
+       Ver graficamente el metodo de biseccion en f(x)
 
     Retorna
     -----------
@@ -55,6 +62,11 @@ def biseccion(
     f_de_intervaloA = f(intervaloA)
     f_de_intervaloB = f(intervaloB)
 
+    if plot:
+        historial_A = [intervaloA]
+        historial_B = [intervaloB]
+        historial_Raiz = [aproxNueva]
+
     while errorRelativo > tolerancia:
         if f_de_intervaloA * f_de_aproxNueva == 0:  # Se encontro la raíz exacta
             break
@@ -74,5 +86,13 @@ def biseccion(
         errorRelativo = abs((aproxNueva - aproxAnterior) / aproxNueva)
 
         iteraciones += 1
+
+        if plot:
+            historial_A.append(intervaloA)
+            historial_B.append(intervaloB)
+            historial_Raiz.append(aproxNueva)
+
+    if plot:
+        plot_biseccion.paint_plot(f, historial_A, historial_B, historial_Raiz)
 
     return aproxNueva, errorRelativo, iteraciones
