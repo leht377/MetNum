@@ -1,12 +1,17 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.animation import FuncAnimation
 from matplotlib.widgets import Button
+
+
+frameAnimation = 0
 
 
 def paint_plot(f, historialA, historialB, historialRaiz):
 
+    maximosFrames = len(historialRaiz) - 1
+
     fig, ax = plt.subplots(figsize=(10, 8))
+    plt.subplots_adjust(bottom=0.2)
 
     rangoIzquierdo = (
         (historialA[0] - 10) if historialA[0] < 0 else ((historialA[0] * -1) - 10)
@@ -25,15 +30,16 @@ def paint_plot(f, historialA, historialB, historialRaiz):
     linea_B = ax.axvline(x=historialB[0], ymin=0, ymax=1, color="b")
     punto_medio.set_marker(marker="o")
 
-    def init():
-        ax.set_xlim(historialA[0] - 10, historialB[0] + 10)
-        ax.set_ylim(f(historialA[0]), f(historialB[0]))
-        return (funcion,)
+    axprev = plt.axes([0.7, 0.05, 0.1, 0.075])
+    axnext = plt.axes([0.81, 0.05, 0.1, 0.075])
+
+    btnnext = Button(axnext, "Siguiente")
+    btnprev = Button(axprev, "Atras")
 
     def update(frame):
         linea_A.set_xdata(historialA[frame])
         linea_B.set_xdata(historialB[frame])
-        punto_medio.set_xdata(historialRaiz[frame])
+        punto_medio.set_xdata(historialRaiz[(frame)])
         ax.legend(
             [
                 "f(x)",
@@ -42,17 +48,22 @@ def paint_plot(f, historialA, historialB, historialRaiz):
                 f"b {historialB[frame]}",
             ]
         )
-        return (funcion, linea_A, linea_B, punto_medio, ax.get_legend())
+        plt.draw()
 
-    ani = FuncAnimation(
-        fig,
-        update,
-        frames=np.arange(0, len(historialRaiz) - 1),
-        init_func=init,
-        interval=2000,
-        blit=False,
-        repeat=False,
-    )
+    def next(event):
+        global frameAnimation
+        if frameAnimation < maximosFrames:
+            frameAnimation += 1
+            update(frameAnimation)
+
+    def prev(event):
+        global frameAnimation
+        if frameAnimation > 0:
+            frameAnimation -= 1
+            update(frameAnimation)
+
+    btnnext.on_clicked(next)
+    btnprev.on_clicked(prev)
 
     plt.grid()
     plt.show()

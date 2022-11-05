@@ -1,5 +1,5 @@
 from .decoradores import args_type_checking
-from .plot import plot_biseccion
+from .plot import plot_biseccion_manual
 
 
 @args_type_checking
@@ -69,6 +69,7 @@ def biseccion(
 
     while errorRelativo > tolerancia:
         if f_de_intervaloA * f_de_aproxNueva == 0:  # Se encontro la raíz exacta
+            errorRelativo = 0
             break
         # La raíz  esta en [aproxNueva, intervaloB]
         if f_de_intervaloB * f_de_aproxNueva < 0:
@@ -93,6 +94,6 @@ def biseccion(
             historial_Raiz.append(aproxNueva)
 
     if plot:
-        plot_biseccion.paint_plot(f, historial_A, historial_B, historial_Raiz)
+        plot_biseccion_manual.paint_plot(f, historial_A, historial_B, historial_Raiz)
 
     return aproxNueva, errorRelativo, iteraciones
