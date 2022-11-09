@@ -30,12 +30,14 @@ def paint_plot(f, historialA, historialB, historialRaiz):
     x_lineaB = np.array([historialB[0], historialB[0]])
     y_lineaB = np.array([historialB[0], f(historialB[0])])
 
-    (funcion, punto_medio, linea_A, linea_B) = ax.plot(
-        x, y, x_punto_medio, y_punto_medio, x_lineaA, y_lineaA, x_lineaB, y_lineaB
-    )
+    # (funcion, punto_medio, linea_A, linea_B) = ax.plot(
+    #     x, y, x_punto_medio, y_punto_medio, x_lineaA, y_lineaA, x_lineaB, y_lineaB
+    # )
 
-    # linea_A = ax.axvline(x=historialA[0], ymin=0, ymax=1, color="r")
-    # linea_B = ax.axvline(x=historialB[0], ymin=0, ymax=1, color="b")
+    (funcion, punto_medio) = ax.plot(x, y, x_punto_medio, y_punto_medio)
+
+    linea_A = ax.axvline(x=historialA[0], ymin=0, ymax=1, color="r")
+    linea_B = ax.axvline(x=historialB[0], ymin=0, ymax=1, color="b")
     punto_medio.set_marker(marker="o")
     linea_A.set_linestyle("--")
     linea_B.set_linestyle("--")
@@ -47,14 +49,14 @@ def paint_plot(f, historialA, historialB, historialRaiz):
     btnprev = Button(axprev, "Atras")
 
     def update(frame):
-        linea_A.set_xdata([historialA[frame], historialA[frame]])
-        linea_A.set_ydata([historialA[frame], f(historialA[frame])])
+        # linea_A.set_xdata([historialA[frame], historialA[frame]])
+        # linea_A.set_ydata([historialA[frame], f(historialA[frame])])
 
-        linea_B.set_xdata([historialB[frame], historialB[frame]])
-        linea_B.set_ydata([historialB[frame], f(historialB[frame])])
+        # linea_B.set_xdata([historialB[frame], historialB[frame]])
+        # linea_B.set_ydata([historialB[frame], f(historialB[frame])])
 
-        # linea_A.set_xdata(historialA[frame])
-        # linea_B.set_xdata(historialB[frame])
+        linea_A.set_xdata(historialA[frame])
+        linea_B.set_xdata(historialB[frame])
 
         punto_medio.set_xdata(historialRaiz[(frame)])
         ax.legend(
