@@ -9,14 +9,16 @@ fdx = lambda x: 2 * x + 53
 x0 = -8
 x1 = 1
 maxIteraciones = 40
-print("BISECCION: ", biseccion(f, intervaloA, intervaloB, tolerancia, True))
+# print("BISECCION: ", biseccion(f, intervaloA, intervaloB, tolerancia, True))
 
 
 # print("REGLA FALSA: ", reglaFalsa(f, intervaloA, intervaloB, tolerancia))
-# print(
-#    "NEWTON RAPSON: ",
-#   newtonRapson(f, fdx, x0, tolerancia, maxIteraciones),
-# )
+print(
+    "NEWTON RAPSON: ",
+    newtonRapson(
+        lambda x: x**2 + 53 * x + 5, lambda x: 2 * x + 53, 1, tolerancia, 20
+    ),
+)
 # print("SECANTE: ", secante(f, x0, x1, tolerancia, maxIteraciones))
 
 
