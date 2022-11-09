@@ -1,35 +1,25 @@
-# feval -> octave = eval -> python
+def newtonRapson(
+    f,
+    fDerivadax,
+    puntoInicial: int or float,
+    toleracia: int or float,
+    maximoInteraciones: int or float,
+) -> tuple:
+    """ """
+    interaciones = 0
+    aproxNueva = puntoInicial
 
-# eval ->  eval(expresion,globales,locales)
-# expresión : la cadena analizada y evaluada como una expresión de Python
-# globales (opcional) - un diccionario
-# locales (opcional)- un objeto de mapeo. El diccionario es el tipo de mapeo estándar y de uso común en Python.
+    f_de_apoxNueva = f(aproxNueva)
+    fdx_aproxNueva = fDerivadax(aproxNueva)
 
+    difsuc = f_de_apoxNueva / fdx_aproxNueva
 
-def newtonRapson(f, fdx, x0, tol, maxIter):
-    n = 0
-    xn = x0
+    while abs(difsuc) >= toleracia and interaciones <= maximoInteraciones:
+        interaciones += 1
+        aproxNueva = aproxNueva - difsuc
+        f_de_apoxNueva = f(aproxNueva)
+        fdx_aproxNueva = fDerivadax(aproxNueva)
 
-    # fxn = eval("f(x)", {"__builtins__": None}, {"f": f, "x": xn})
-    # fdxxn = eval("fdx(x)", {"__builtins__": None}, {"fdx": fdx, "x": xn})
+        difsuc = f_de_apoxNueva / fdx_aproxNueva
 
-    fxn = f(xn)
-    fdxxn = fdx(xn)
-
-    # fxn = f(xn)
-    # fdxxn =fdx(xn)
-
-    difsuc = fxn / fdxxn  # Diferencia entre iteraciones sucesivas
-
-    while abs(difsuc) >= tol and n <= maxIter:
-        n += 1
-        xn = xn - difsuc
-        fxn = f(xn)
-        fdxxn = fdx(xn)
-
-        # fxn = eval("f(x)", {"__builtins__": None}, {"f": f, "x": xn})
-        # fdxxn = eval("fdx(x)", {"__builtins__": None}, {"fdx": fdx, "x": xn})
-
-        difsuc = fxn / fdxxn
-
-    return {"c": xn, "error": abs(fxn), "numiter": n}
+    return aproxNueva, abs(f_de_apoxNueva), interaciones
