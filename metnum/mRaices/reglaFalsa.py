@@ -1,9 +1,14 @@
 from .decoradores import args_type_checking
+from .plot import plot_reglaFalsa
 
 
 @args_type_checking
 def reglaFalsa(
-    f, intervaloA: int or float, intervaloB: int or float, tolerancia: int or float
+    f,
+    intervaloA: int or float,
+    intervaloB: int or float,
+    tolerancia: int or float,
+    plot: bool = False,
 ) -> tuple:
     """
     En esta funcion podemos encontrar el valor de la raiz en una funcion F(x)
@@ -54,6 +59,11 @@ def reglaFalsa(
     f_de_aproxNueva = f(aproxNueva)
     errorRelativo = 1000
 
+    if plot:
+        historial_A = [intervaloA]
+        historial_B = [intervaloB]
+        historial_Raiz = [aproxNueva]
+
     while errorRelativo >= tolerancia:
         iteraciones += 1
 
@@ -77,5 +87,13 @@ def reglaFalsa(
 
         f_de_aproxNueva = f(aproxNueva)
         errorRelativo = abs((aproxNueva - aproxAnterior) / aproxNueva * 100)
+
+        if plot:
+            historial_A.append(intervaloA)
+            historial_B.append(intervaloB)
+            historial_Raiz.append(aproxNueva)
+
+    if plot:
+        plot_reglaFalsa.paint_plot(f, historial_A, historial_B, historial_Raiz)
 
     return aproxNueva, errorRelativo, iteraciones

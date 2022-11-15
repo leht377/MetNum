@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.animation import FuncAnimation
-from matplotlib.widgets import Button
 
 
 def paint_plot(f, historialA, historialB, historialRaiz):

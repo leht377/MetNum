@@ -11,10 +11,16 @@ import matplotlib.pyplot as plt
 # x0 = -8
 # x1 = 1
 # maxIteraciones = 40
-print("BISECCION: ", biseccion(lambda x: x**2 + 53 * x + 5, -1, 1, 10**-6, True))
+# print(
+#     "BISECCION: ",
+#     biseccion(lambda x: -1 * x**3 + 3 * x - 4, -3, -1.5, 10**-6, True),
+# )
 
 
-# print("REGLA FALSA: ", reglaFalsa(f, intervaloA, intervaloB, tolerancia))
+print(
+    "REGLA FALSA: ",
+    reglaFalsa(lambda x: x**2 - 3 * x, 1, 5, 10**-6, True),
+)
 # print(
 #    "NEWTON RAPSON: ",
 #   newtonRapson(f, fdx, x0, tolerancia, maxIteraciones),
