@@ -1,24 +1,30 @@
 from metnum import biseccion, reglaFalsa, newtonRapson, secante
-
-f = lambda x: x**3 - 5 * x**2 + 4 * x
-tolerancia = 10**-8
-intervaloA = -1
-intervaloB = 1
-
-fdx = lambda x: 2 * x + 53
-x0 = -8
-x1 = 1
-maxIteraciones = 40
-# print("BISECCION: ", biseccion(f, intervaloA, intervaloB, tolerancia, True))
+import matplotlib.pyplot as plt
 
 
-# print("REGLA FALSA: ", reglaFalsa(f, intervaloA, intervaloB, tolerancia))
+# f = lambda x: x**3 - 5 * x**2 + 4 * x
+# tolerancia = 10**-8
+# intervaloA = -1
+# intervaloB = 1
+
+# fdx = lambda x: 2 * x + 53
+# x0 = -8
+# x1 = 1
+# maxIteraciones = 40
+# print(
+#     "BISECCION: ",
+#     biseccion(lambda x: -1 * x**3 + 3 * x - 4, -3, -1.5, 10**-6, True),
+# )
+
+
 print(
-    "NEWTON RAPSON: ",
-    newtonRapson(
-        lambda x: x**2 + 53 * x + 5, lambda x: 2 * x + 53, 1, tolerancia, 20
-    ),
+    "REGLA FALSA: ",
+    reglaFalsa(lambda x: x**2 - 3 * x, 1, 5, 10**-6, True),
 )
+# print(
+#    "NEWTON RAPSON: ",
+#   newtonRapson(f, fdx, x0, tolerancia, maxIteraciones),
+# )
 # print("SECANTE: ", secante(f, x0, x1, tolerancia, maxIteraciones))
 
 

@@ -61,7 +61,6 @@ def biseccion(
     f_de_aproxNueva = f(aproxNueva)
     f_de_intervaloA = f(intervaloA)
     f_de_intervaloB = f(intervaloB)
-
     if plot:
         historial_A = [intervaloA]
         historial_B = [intervaloB]

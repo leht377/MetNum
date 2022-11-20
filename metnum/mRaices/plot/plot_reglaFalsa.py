@@ -24,24 +24,41 @@ def paint_plot(f, historialA, historialB, historialRaiz):
     x_punto_medio = np.array([historialRaiz[0]])
     y_punto_medio = np.array([0])
 
-    x_lineaA = np.array([historialA[0], historialA[0]])
-    y_lineaA = np.array([historialA[0], f(historialA[0])])
+    x_tanjete = np.array([historialA[0], historialB[0]])
+    y_tanjete = np.array([f(historialA[0]), f(historialB[0])])
 
-    x_lineaB = np.array([historialB[0], historialB[0]])
-    y_lineaB = np.array([historialB[0], f(historialB[0])])
+    x_puntoA = np.array([historialA[0], historialA[0]])
+    y_puntoA = np.array([0, f(historialA[0])])
 
-    # (funcion, punto_medio, linea_A, linea_B) = ax.plot(
-    #     x, y, x_punto_medio, y_punto_medio, x_lineaA, y_lineaA, x_lineaB, y_lineaB
-    # )
+    x_puntoB = np.array([historialB[0], historialB[0]])
+    y_puntoB = np.array([0, f(historialB[0])])
 
-    (funcion, punto_medio) = ax.plot(x, y, x_punto_medio, y_punto_medio)
+    (funcion, punto_medio, tanjente, linea_A, linea_B) = ax.plot(
+        x,
+        y,
+        x_punto_medio,
+        y_punto_medio,
+        x_tanjete,
+        y_tanjete,
+        x_puntoA,
+        y_puntoA,
+        x_puntoB,
+        y_puntoB,
+    )
 
-    linea_A = ax.axvline(x=historialA[0], ymin=0, ymax=1, color="r")
-    linea_B = ax.axvline(x=historialB[0], ymin=0, ymax=1, color="b")
     punto_medio.set_marker(marker="o")
+    ax.legend(
+        [
+            "f(x)",
+            f"Raiz {historialRaiz[0]}",
+            f"Tanjente [f(a), f(b)]",
+            f"intevalo a: {historialA[0]} ",
+            f"intevalo b: {historialB[0]} ",
+        ]
+    )
+
     linea_A.set_linestyle("--")
     linea_B.set_linestyle("--")
-
     plt.axhline(0, color="black")
     plt.axvline(0, color="black")
 
@@ -52,24 +69,26 @@ def paint_plot(f, historialA, historialB, historialRaiz):
     btnprev = Button(axprev, "Atras")
 
     def update(frame):
-        # linea_A.set_xdata([historialA[frame], historialA[frame]])
-        # linea_A.set_ydata([historialA[frame], f(historialA[frame])])
+        linea_A.set_xdata([historialA[frame], historialA[frame]])
+        linea_A.set_ydata([0, f(historialA[frame])])
 
-        # linea_B.set_xdata([historialB[frame], historialB[frame]])
-        # linea_B.set_ydata([historialB[frame], f(historialB[frame])])
+        linea_B.set_xdata([historialB[frame], historialB[frame]])
+        linea_B.set_ydata([0, f(historialB[frame])])
 
-        linea_A.set_xdata(historialA[frame])
-        linea_B.set_xdata(historialB[frame])
+        tanjente.set_xdata([historialA[frame], historialB[frame]])
+        tanjente.set_ydata([f(historialA[frame]), f(historialB[frame])])
 
         punto_medio.set_xdata(historialRaiz[(frame)])
         ax.legend(
             [
                 "f(x)",
                 f"Raiz {historialRaiz[frame]}",
-                f"a {historialA[frame]}",
-                f"b {historialB[frame]}",
+                f"Tanjente [f(a), f(b)]",
+                f"intevalo a: {historialA[frame]} ",
+                f"intevalo b: {historialB[frame]} ",
             ]
         )
+
         plt.draw()
 
     def next(event):
