@@ -6,86 +6,116 @@ from matplotlib.widgets import Button
 frameAnimation = 0
 
 
-def paint_plot(f, historialA, historialB, historialRaiz):
+class grafica:
+    def __init__(self, f, historialA, historialB, historialRaiz) -> None:
 
-    maximosFrames = len(historialRaiz) - 1
+        self.titulo = "Biseccion"
+        self.frameAnimation = 0
+        self.maximosFrames = len(historialRaiz) - 1
 
-    fig, ax = plt.subplots(figsize=(10, 8))
-    plt.subplots_adjust(bottom=0.2)
+        self.f = f
+        self.historialA = np.array(historialA)
+        self.historialB = np.array(historialB)
+        self.historialRaiz = np.array(historialRaiz)
 
-    rangoIzquierdo = (
-        (historialA[0] - 10) if historialA[0] < 0 else ((historialA[0] * -1) - 10)
-    )
-    rangoDerecho = historialB[0] + 10
+        self.fig, self.ax = plt.subplots()
 
-    x = np.arange(rangoIzquierdo, rangoDerecho, 1)
-    y = [f(x) for x in x]
+        self.funcion = None
+        self.punto_medio = None
+        self.linea_A = None
+        self.linea_B = None
 
-    x_punto_medio = np.array([historialRaiz[0]])
-    y_punto_medio = np.array([0])
+    def _update(self, frame):
+        if frame < self.maximosFrames:
+            self.linea_A.set_xdata([self.historialA[frame], self.historialA[frame]])
+            self.linea_A.set_ydata([0, self.f(self.historialA[frame])])
 
-    x_lineaA = np.array([historialA[0], historialA[0]])
-    y_lineaA = np.array([historialA[0], f(historialA[0])])
+            self.linea_B.set_xdata([self.historialB[frame], self.historialB[frame]])
+            self.linea_B.set_ydata([0, self.f(self.historialB[frame])])
+            self.punto_medio.set_xdata(self.historialRaiz[(frame)])
 
-    x_lineaB = np.array([historialB[0], historialB[0]])
-    y_lineaB = np.array([historialB[0], f(historialB[0])])
+            self.ax.legend(
+                [
+                    "f(x)",
+                    f"Raiz {self.historialRaiz[frame]}",
+                    f"a {self.historialA[frame]}",
+                    f"b {self.historialB[frame]}",
+                ]
+            )
+            self.ax.set_title(f"{self.titulo}\n Paso {frame+1}/{self.maximosFrames}")
+            plt.draw()
 
-    # (funcion, punto_medio, linea_A, linea_B) = ax.plot(
-    #     x, y, x_punto_medio, y_punto_medio, x_lineaA, y_lineaA, x_lineaB, y_lineaB
-    # )
+    def _next(self, event):
+        if self.frameAnimation < self.maximosFrames:
+            self.frameAnimation += 1
+            self._update(self.frameAnimation)
 
-    (funcion, punto_medio) = ax.plot(x, y, x_punto_medio, y_punto_medio)
+    def _prev(self, event):
+        if self.frameAnimation > 0:
+            self.frameAnimation -= 1
+            self._update(self.frameAnimation)
 
-    linea_A = ax.axvline(x=historialA[0], ymin=0, ymax=1, color="r")
-    linea_B = ax.axvline(x=historialB[0], ymin=0, ymax=1, color="b")
-    punto_medio.set_marker(marker="o")
-    linea_A.set_linestyle("--")
-    linea_B.set_linestyle("--")
+    def _valores_iniciales(self):
+        procentajeEspacio = 0.15
 
-    plt.axhline(0, color="black")
-    plt.axvline(0, color="black")
+        plt.subplots_adjust(bottom=0.2)
+        self.ax.set_title(f"{self.titulo}\n Paso 1/{self.maximosFrames}")
 
-    axprev = plt.axes([0.7, 0.05, 0.1, 0.075])
-    axnext = plt.axes([0.81, 0.05, 0.1, 0.075])
+        tempArray = np.concatenate((self.historialA, self.historialB), axis=0)
 
-    btnnext = Button(axnext, "Siguiente")
-    btnprev = Button(axprev, "Atras")
+        minEjeX = min(tempArray)
+        maxEjex = max(tempArray)
 
-    def update(frame):
-        # linea_A.set_xdata([historialA[frame], historialA[frame]])
-        # linea_A.set_ydata([historialA[frame], f(historialA[frame])])
+        diferenciaEjeX = abs(minEjeX - maxEjex)
+        espaciamiento = diferenciaEjeX * procentajeEspacio
 
-        # linea_B.set_xdata([historialB[frame], historialB[frame]])
-        # linea_B.set_ydata([historialB[frame], f(historialB[frame])])
+        x = np.arange((minEjeX - espaciamiento), (maxEjex + espaciamiento), 0.1)
+        y = [self.f(x) for x in x]
 
-        linea_A.set_xdata(historialA[frame])
-        linea_B.set_xdata(historialB[frame])
+        x_punto_medio = np.array([self.historialRaiz[0]])
+        y_punto_medio = np.array([0])
 
-        punto_medio.set_xdata(historialRaiz[(frame)])
-        ax.legend(
+        x_lineaA = np.array([self.historialA[0], self.historialA[0]])
+        y_lineaA = np.array([0, self.f(self.historialA[0])])
+
+        x_lineaB = np.array([self.historialB[0], self.historialB[0]])
+        y_lineaB = np.array([0, self.f(self.historialB[0])])
+
+        (self.funcion, self.punto_medio, self.linea_A, self.linea_B,) = self.ax.plot(
+            x,
+            y,
+            x_punto_medio,
+            y_punto_medio,
+            x_lineaA,
+            y_lineaA,
+            x_lineaB,
+            y_lineaB,
+        )
+        self.punto_medio.set_marker(marker="o")
+        self.linea_A.set_linestyle("--")
+        self.linea_B.set_linestyle("--")
+        self.ax.legend(
             [
                 "f(x)",
-                f"Raiz {historialRaiz[frame]}",
-                f"a {historialA[frame]}",
-                f"b {historialB[frame]}",
+                f"Raiz {self.historialRaiz[0]}",
+                f"a {self.historialA[0]}",
+                f"b {self.historialB[0]}",
             ]
         )
-        plt.draw()
 
-    def next(event):
-        global frameAnimation
-        if frameAnimation < maximosFrames:
-            frameAnimation += 1
-            update(frameAnimation)
+        self._valores_iniciales()
 
-    def prev(event):
-        global frameAnimation
-        if frameAnimation > 0:
-            frameAnimation -= 1
-            update(frameAnimation)
+        plt.axhline(0, color="black")  # ejeX plano cartesiano
+        plt.axvline(0, color="black")  # ejeY plano cartesiano
 
-    btnnext.on_clicked(next)
-    btnprev.on_clicked(prev)
+        axprev = plt.axes([0.7, 0.05, 0.1, 0.075])
+        axnext = plt.axes([0.81, 0.05, 0.1, 0.075])
 
-    ax.grid()
-    plt.show()
+        btnnext = Button(axnext, "Siguiente")
+        btnprev = Button(axprev, "Atras")
+
+        btnnext.on_clicked(self._next)
+        btnprev.on_clicked(self._prev)
+
+        self.ax.grid()
+        plt.show()
