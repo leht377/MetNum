@@ -91,8 +91,9 @@ def biseccion(
             historial_B.append(intervaloB)
             historial_Raiz.append(aproxNueva)
 
-    if plot:
-        plot_biseccion_manual.paint_plot(f, historial_A, historial_B, historial_Raiz)
-        # plot_biseccion.paint_plot(f, historial_A, historial_B, historial_Raiz)
+    plot and plot_biseccion_manual.grafica(
+        f, historial_A, historial_B, historial_Raiz
+    ).pintarGrafica()
+    # plot_biseccion.paint_plot(f, historial_A, historial_B, historial_Raiz)
 
     return aproxNueva, errorRelativo, iteraciones

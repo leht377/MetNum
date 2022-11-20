@@ -1,46 +1,40 @@
 from metnum import biseccion, reglaFalsa, newtonRapson, secante
 import matplotlib.pyplot as plt
-
-
-# f = lambda x: x**3 - 5 * x**2 + 4 * x
-# tolerancia = 10**-8
-# intervaloA = -1
-# intervaloB = 1
-
-# fdx = lambda x: 2 * x + 53
-# x0 = -8
-# x1 = 1
-# maxIteraciones = 40
-# print(
-#     "BISECCION: ",
-#     biseccion(lambda x: -1 * x**3 + 3 * x - 4, -3, -1.5, 10**-6, True),
-# )
+import math
 
 
 print(
+    "BISECCION: ",
+    biseccion(lambda x: -1 * x**3 + 3 * x - 4, -3, -1.5, 10**-6, True),
+)
+print(
     "REGLA FALSA: ",
-    reglaFalsa(lambda x: x**2 - 3 * x, 1, 5, 10**-6, True),
+    reglaFalsa(lambda x: -1 * x**3 + 3 * x - 4, -3, -1.5, 10**-6, True),
+)
+print(
+    "NEWTON RAPSON: ",
+    newtonRapson(
+        lambda x: -1 * x**3 + 3 * x - 4,
+        lambda x: -3 * x**2 + 3,
+        -1.5,
+        10**-6,
+        20,
+        True,
+    ),
 )
 # print(
-#    "NEWTON RAPSON: ",
-#   newtonRapson(f, fdx, x0, tolerancia, maxIteraciones),
+#     "REGLA FALSA: ",
+#     reglaFalsa(lambda x: x**3 - 1 * x - 1, 1, 1.8, 10**-6, True),
+# )
+# print(
+#     "NEWTON RAPSON: ",
+#     newtonRapson(
+#         lambda x: x**7 - 4 * x**4 - x,
+#         lambda x: 7 * x**6 - 16 * x**3,
+#         4,
+#         10**-6,
+#         20,
+#         True,
+#     ),
 # )
 # print("SECANTE: ", secante(f, x0, x1, tolerancia, maxIteraciones))
-
-
-# import numpy as np
-# import matplotlib.pyplot as plt
-
-
-# plt.figure(figsize=(6, 6))
-# x = np.linspace(-5, 5, 100)
-# plt.plot(x, x**2, "ko", label="quadratic")
-# plt.plot(x, x**3, "r*", label="cubic")
-# plt.title(f"Plot of Various Polynomials from {x[0]} to {x[-1]}")
-# plt.xlabel("X axis")
-# plt.ylabel("Y axis")
-# plt.legend(loc=2)
-# plt.xlim(-100, 100)
-# plt.ylim(-10, 10)
-# plt.grid()
-# plt.show()

@@ -93,7 +93,11 @@ def reglaFalsa(
             historial_B.append(intervaloB)
             historial_Raiz.append(aproxNueva)
 
-    if plot:
-        plot_reglaFalsa.paint_plot(f, historial_A, historial_B, historial_Raiz)
+    # if plot:
+    #     plot_reglaFalsa.paint_plot(f, historial_A, historial_B, historial_Raiz)
+
+    plot and plot_reglaFalsa.grafica(
+        f, historial_A, historial_B, historial_Raiz
+    ).pintarGrafica()
 
     return aproxNueva, errorRelativo, iteraciones
