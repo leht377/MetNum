@@ -103,6 +103,7 @@ class grafica:
             ]
         )
 
+    def pintarGrafica(self):
         self._valores_iniciales()
 
         plt.axhline(0, color="black")  # ejeX plano cartesiano
