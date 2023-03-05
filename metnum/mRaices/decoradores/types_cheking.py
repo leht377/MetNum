@@ -6,6 +6,7 @@ def args_type_checking(fn):
             "intervaloA": args[1],
             "intervaloB": args[2],
             "tolerancia": args[3],
+            "plot": (args[4]) if len(args) > 4 else False,
         }
 
         if not callable(argumentos["f(x)"]):
@@ -19,6 +20,9 @@ def args_type_checking(fn):
 
         if not isinstance(argumentos["tolerancia"], (int, float)):
             raise TypeError("La toleracia deben ser entero o float")
+
+        if not isinstance(argumentos["plot"], (bool)):
+            raise TypeError("Plot debe de ser de tipo bool")
 
         return fn(*args)
 

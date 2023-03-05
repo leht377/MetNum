@@ -19,7 +19,7 @@ class test_biseccion(unittest.TestCase):
             biseccion("lambda x: x**2 + 53 * x + 5", -1, 1, 10**-6)
         self.assertTrue("El objeto no es invocable" in str(context.exception))
 
-    def test_laza_TypeError_si_los_parametros_no_son_numericos(self):
+    def test_laza_TypeError_si_los_parametros_no_son_correctos(self):
         with self.assertRaises(TypeError) as context:
             biseccion(lambda x: x**2 + 53 * x + 5, "-1", 1, 10**-6)
         self.assertTrue(
@@ -38,8 +38,14 @@ class test_biseccion(unittest.TestCase):
             "La toleracia deben ser entero o float" in str(context.exception)
         )
 
-    # def test_error_si_el_intervalo_no_tiene_una_raiz(self):
-    #     pass
+        with self.assertRaises(TypeError) as context:
+            biseccion(lambda x: x**2 + 53 * x + 5, -1, 1, 10**-6, "string")
+        self.assertTrue("Plot debe de ser de tipo bool" in str(context.exception))
+
+    def test_laza_Error_si_el_intervalo_no_tiene_una_raiz(self):
+        with self.assertRaises(TypeError) as context:
+            biseccion(lambda x: x**2 + 53 * x + 5, 10, 1, 10**-6)
+        self.assertTrue("No hay raiz en el intervalo" in str(context.exception))
 
 
 if __name__ == "__main__":

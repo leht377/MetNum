@@ -12,6 +12,7 @@ def biseccion(
 ) -> tuple:
     """
     Esta funcion entrega el valor aproximado de una raíz que esta en la función continua f(x)
+    usando el método de biseccion
 
     Parametros
     -----------
@@ -25,7 +26,7 @@ def biseccion(
     tolerancia : float or int
         Tolerancia maxima con la cual se acepta la aproximación de la raíz
     (Opcional)  plot: bool
-       Ver graficamente el metodo de biseccion en f(x)
+       Ver graficamente el metodo de biseccion
 
     Retorna
     -----------
