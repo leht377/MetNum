@@ -27,6 +27,9 @@ def reglaFalsa(
     tolerancia: int or float
        Tolerancia maxima con la cual se acepta la aproximación de la raíz
 
+    (Opcional)  plot: bool
+       Ver graficamente el metodo de biseccion
+
     retorna
     ----------
 
