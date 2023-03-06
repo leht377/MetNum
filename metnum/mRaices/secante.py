@@ -1,34 +1,3 @@
-# def secante(
-#     f,
-#     aproximacion0: int or float,
-#     aproximacion1: int or float,
-#     tolerancia: int or float,
-#     maximoInteraciones: int or float,
-# ) -> tuple:
-#     """ """
-
-#     iteraciones = 1
-#     dfsuc = aproximacion1 - aproximacion0
-#     aproximacionNueva0 = aproximacion0
-#     aproximacionNueva1 = aproximacion1
-
-#     f_de_aproximacioNueva0 = f(aproximacionNueva0)
-#     f_de_aproximacionNueva1 = f(aproximacionNueva1)
-
-#     while abs(dfsuc) >= tolerancia and iteraciones <= maximoInteraciones:
-#         iteraciones = iteraciones + 1
-#         dfsuc = (
-#             f_de_aproximacionNueva1
-#             * (aproximacionNueva1 - aproximacionNueva0)
-#             / (f_de_aproximacionNueva1 - f_de_aproximacioNueva0)
-#         )
-#         aproximacionNueva0 = aproximacionNueva1
-#         f_de_aproximacioNueva0 = f_de_aproximacionNueva1
-#         aproximacionNueva1 = f_de_aproximacionNueva1 - dfsuc
-#         f_de_aproximacionNueva1 = f(aproximacionNueva1)
-
-#     return aproximacionNueva1, abs(f_de_aproximacionNueva1), iteraciones - 1
-
 from .plot import plot_secante
 
 
