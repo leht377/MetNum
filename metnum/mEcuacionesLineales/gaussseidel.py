@@ -42,9 +42,10 @@ import numpy as np
 
 
 # norm -> octave = np.linalg.norm -> python libreria numpy
+# panda
 
 
-def gaussseidel(a, b, x0, tol=pow(10, -12), maxiter=25) -> list:
+def gaussSeidel(a, b, x0, tol=pow(10, -12), maxiter=25) -> list:
 
     a = np.array(a)
     b = np.array(b)

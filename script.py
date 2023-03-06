@@ -1,6 +1,18 @@
-from metnum import biseccion, reglaFalsa, newtonRapson, secante
+from metnum import biseccion, reglaFalsa, newtonRapson, secante, gaussJordan
+
+
 import matplotlib.pyplot as plt
 import math
+
+A = [
+    [2, -1, 4, 1, -1],
+    [-1, 3, -2, -1, 2],
+    [5, 1, 3, -4, 1],
+    [3, -2, -2, -2, -3],
+    [-4, -1, -5, 3, -4],
+]
+b = [[7], [1], [33], [24], [-49]]
+print(gaussJordan(A, b))
 
 # print(
 #     "BISECCION: ",
