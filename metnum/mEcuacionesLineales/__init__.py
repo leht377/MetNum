@@ -1,2 +1,2 @@
 from .gaussJordan import gaussJordan
-from .gaussSeidel import gaussseidel
+from .gaussSeidel import gaussSeidel
