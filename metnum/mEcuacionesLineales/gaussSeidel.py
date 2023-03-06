@@ -1,68 +1,66 @@
-# import numpy as np
-
-
-# def gaussseidel(A, b, x0, tol=pow(10, -12), maxiter=25):
-#     A = np.array(A)
-#     b = np.array(b)
-
-#     n = len(A)
-#     x = np.array(x0, dtype=float)
-#     iter = 0
-#     normb = np.linalg.norm(b)
-
-#     while (np.linalg.norm((A * x - b)[:, 0]) > tol * normb) and (iter < maxiter):
-#         iter += 1
-#         for j in range(3):
-#             resultA = np.concatenate([A[j][0:j], A[j][j + 1 : n + 1]])
-#             resultX = np.concatenate([x[0:j], x[j + 1 : n + 1]])
-
-#             x[j] = ((b[j] - resultA * resultX) / A[j][j])[0][0]
-#     return x
-
-
-# matrizA = [[6, 2, 1], [-1, 8, 2], [1, -1, 6]]
-# matrizB = [[25], [-6], [23]]
-# x0 = np.array([[0], [0], [0]])
-
-# print(*gaussseidel(matrizA, matrizB, x0))
-
-
-# x = np.array([matrizA[0][0:0], matrizA[0][0 + 1 : n + 1]], dtype=list)
-
-
-# print(np.linalg.norm((matrizA * matrizX - matizB)[:, 0]))
-
-
-# print(np.array([[1], [2], [3]], ndmin=2))
-
-# print(np.linalg.norm(matizB))
-
-
 import numpy as np
 
 
-# norm -> octave = np.linalg.norm -> python libreria numpy
-# panda
+def gaussSeidel(
+    A: list[float],
+    b: list[float],
+    x0: list[float],
+    tol: int or float = pow(10, -12),
+    maxiter: int = 25,
+) -> list:
+    """
+    Esta funcion resuelve sistemas de ecuaciones liniales usando el método numerico
+    de Gauss-Seidel
+
+    Paramatros
+    -----------
+
+    A: list[float]
+        Matriz de coeficiente del sistema de ecuaciones
+    b: list[float]
+        Matriz de incognitas del sistema de ecuaciones
+    x0: list[float]
+        Matriz de estimación inicial al sistema de ecuaciones
+    (opcional) tol: int or float
+        Tolerancia maxima con la cual se acepta la soluci+on
+    (opcional) maxiter: int
+        Numero maximo de iteraciones para encontrar una solución
 
 
-def gaussSeidel(a, b, x0, tol=pow(10, -12), maxiter=25) -> list:
+    Retorna
+    ----------
 
-    a = np.array(a)
+    x: list
+        Matriz con la solucion al sistema de ecuaciones liniales
+
+    Ejemplos
+    ----------
+
+    ejemplo #1
+
+    >>> gaussSeidel([[6, 2, 1], [-1, 8, 2], [1, -1, 6]], [[25], [-6], [23]], [[0], [0], [0]])
+    [[-4],[-1],[3]]
+
+    ejemplo #2
+    >>> gaussSeidel([[3, -0.1, -0.2], [0.1, 7, -0.3], [0.3, -0.2, 10]],[[7.85], [-19.3], [71.4]],[[0], [0], [0]] )
+    [[3.],[-2.5],[7.]]
+    """
+    A = np.array(A)
     b = np.array(b)
     x = np.array(x0, dtype=float)
 
-    n = len(a)
+    n = len(A)
     normb = np.linalg.norm(b)
     iter = 0
 
-    while (np.linalg.norm(np.subtract(np.dot(a, x), b)) > tol * normb) and (
+    while (np.linalg.norm(np.subtract(np.dot(A, x), b)) > tol * normb) and (
         iter < maxiter
     ):
         iter += 1
         for j in range(n):
-            resultA = np.concatenate([a[j][0:j], a[j][j + 1 : n + 1]])
+            resultA = np.concatenate([A[j][0:j], A[j][j + 1 : n + 1]])
             resultX = np.concatenate([x[0:j], x[j + 1 : n + 1]])
 
-            x[j] = (np.subtract(b[j], np.dot(resultA, resultX))) / a[j][j]
+            x[j] = (np.subtract(b[j], np.dot(resultA, resultX))) / A[j][j]
 
     return x
