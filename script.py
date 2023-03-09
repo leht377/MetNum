@@ -1,18 +1,34 @@
-from metnum import biseccion, reglaFalsa, newtonRapson, secante, gaussJordan
+from metnum import (
+    biseccion,
+    reglaFalsa,
+    newtonRapson,
+    secante,
+    gaussJordan,
+    gaussSeidel,
+    jacobi,
+    LU,
+)
 
 
 import matplotlib.pyplot as plt
 import math
 
-A = [
-    [2, -1, 4, 1, -1],
-    [-1, 3, -2, -1, 2],
-    [5, 1, 3, -4, 1],
-    [3, -2, -2, -2, -3],
-    [-4, -1, -5, 3, -4],
-]
-b = [[7], [1], [33], [24], [-49]]
-print(gaussJordan(A, b))
+# A = [
+#     [2, -1, 4, 1, -1],
+#     [-1, 3, -2, -1, 2],
+#     [5, 1, 3, -4, 1],
+#     [3, -2, -2, -2, -3],
+#     [-4, -1, -5, 3, -4],
+# ]
+# b = [[7], [1], [33], [24], [-49]]
+# print(
+#     gaussSeidel(
+#         [[6, 2, 1], [-1, 8, 2], [1, -1, 6]], [[25], [-6], [23]], [[0], [0], [0]]
+#     )
+# )
+
+
+# print(gaussJordan(A, b))
 
 # print(
 #     "BISECCION: ",
@@ -39,3 +55,7 @@ print(gaussJordan(A, b))
 #     "SECANTE: ",
 #     secante(lambda x: x**3 - x**2, 4, 8, 10**-6, 50, True),
 # )
+A = [[10, 2, -3], [4, 7, -1], [-2, 1, 4]]
+b = [[1], [-1], [5]]
+x0 = [[0], [0], [0]]
+print(gaussSeidel(A, b, x0))
