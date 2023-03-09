@@ -19,7 +19,7 @@ import numpy as np
 class test_gaussJordan(unittest.TestCase):
     def test_encontro_incognita1(self):
         matrizA = [[3, -0.1, -0.2], [0.1, 7, -0.3], [0.3, -0.2, 10]]
-        matrizB = [[7.85, -19.3, 71.4]]
+        matrizB = [[7.85], [-19.3], [71.4]]
         resultado = gaussJordan(matrizA, matrizB)
         self.assertIsNone(np.testing.assert_allclose(resultado, [[3], [-2.5], [7]]))
 
@@ -31,7 +31,7 @@ class test_gaussJordan(unittest.TestCase):
 
     def test_encontro_incognita3(self):
         matrizA = [[5, 2, 1], [2, 1, 2], [4, 1, 3]]
-        matrizB = [[20, 10, 17]]
+        matrizB = [[20], [10], [17]]
         resultado = gaussJordan(matrizA, matrizB)
         self.assertIsNone(np.testing.assert_allclose(resultado, [[3], [2], [1]]))
 
