@@ -4,7 +4,6 @@ from metnum import (
     newtonRapson,
     secante,
     gaussJordan,
-    gaussSeidel,
     jacobi,
     LU,
 )
