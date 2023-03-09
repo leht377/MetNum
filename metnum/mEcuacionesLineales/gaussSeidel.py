@@ -1,6 +1,9 @@
 import numpy as np
 
+from .decoradores import args_types_checking_gauss_seidel
 
+
+@args_types_checking_gauss_seidel
 def gaussSeidel(
     A: list[float],
     b: list[float],
