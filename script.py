@@ -1,3 +1,5 @@
+import math
+import matplotlib.pyplot as plt
 from metnum import (
     biseccion,
     reglaFalsa,
@@ -6,11 +8,15 @@ from metnum import (
     gaussJordan,
     jacobi,
     LU,
+    gaussSeidel
 )
 
 
-import matplotlib.pyplot as plt
-import math
+# Creamos una lista de resultados
+resultados = [[3, 5, 6, 7]]
+
+# Imprimimos la lista en forma de tabla
+
 
 # A = [
 #     [2, -1, 4, 1, -1],
@@ -54,7 +60,27 @@ import math
 #     "SECANTE: ",
 #     secante(lambda x: x**3 - x**2, 4, 8, 10**-6, 50, True),
 # )
+
 A = [[10, 2, -3], [4, 7, -1], [-2, 1, 4]]
 b = [[1], [-1], [5]]
 x0 = [[0], [0], [0]]
-print(gaussSeidel(A, b, x0))
+resultado = jacobi(A, b, x0)
+print(jacobi([[6, 2, 1], [-1, 8, 2], [1, -1, 6]],
+      [[25], [-6], [23]], [[0], [0], [0]], 10 ^ -12, 25))
+print(gaussSeidel([[3, -0.1, -0.2], [0.1, 7, -0.3],
+      [0.3, -0.2, 10]], [[7.85], [-19.3], [71.4]], [[0], [0], [0]]))
+
+
+# print(
+#     tabulate(
+#         resultado,
+#         headers=[
+#             "#iter",
+#             "x",
+#             "y",
+#             "z",
+#         ],
+#         tablefmt="orgtbl",
+#         showindex="always",
+#     )
+# )
