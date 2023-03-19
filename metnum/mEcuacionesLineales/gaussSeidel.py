@@ -21,9 +21,9 @@ def gaussSeidel(
     A: list[float]
         Matriz de coeficiente del sistema de ecuaciones
     b: list[float]
-        Matriz de incognitas del sistema de ecuaciones
+        Vector de terminos independientes
     x0: list[float]
-        Matriz de estimación inicial al sistema de ecuaciones
+        vector de estimación inicial al sistema de ecuaciones
     (opcional) tol: int or float
         Tolerancia maxima con la cual se acepta la soluci+on
     (opcional) maxiter: int
