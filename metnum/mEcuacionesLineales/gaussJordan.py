@@ -1,9 +1,36 @@
 import numpy as np
 
 
-def gaussJordan(A, b):
+# TODO Realizar verificacion de tipos de datos en parametros
 
-    # Convertimos las matrices en matrices de numpy
+def gaussJordan(A: list, b: list):
+    """
+    Esta funcion resuelve sistemas de ecuaciones lineales Ax=b usando el método de Gauss-Jordan
+
+    Parametros
+    -----------
+    A: list[float]
+        Matriz de coeficiente del sistema de ecuaciones
+    b: list[float]
+        Vector de terminos independientes
+
+    Retorna
+    ---------
+
+    bx: list[float]
+          Vector con la solucion aproximada al sistema de ecuaciones Ax=b
+
+    Ejemplo
+    ---------
+
+    >>> gaussJordan([[6, 2, 1], [-1, 8, 2], [1, -1, 6]], [[25], [-6], [23]])
+    [[4],[-1],[3]]
+
+    >>> gaussJordan([[3, -0.1, -0.2], [0.1, 7, -0.3], [0.3, -0.2, 10]],[[7.85], [-19.3], [71.4]])
+    [[3.],[-2.5],[7.]]
+    """
+
+    # Convertimos las lista en matrices de numpy
     A = np.array(A)
     b = np.array(b)
 
@@ -26,8 +53,7 @@ def gaussJordan(A, b):
         for i in range(filaActual, nFilas):
 
             pivote = matrizAumentada[i + 1][columnaActual]
-            # SOLO DIOS SABE QUE HICE AQUI,
-            # Multiplicar toda la fila R1 (o anterior) por el pivote y el resultado de esta restarla por la fila que se esta operando
+            # Multiplicar toda la fila R1 (o anterior) por el pivote y con el resultado de esta restarla por la fila que se esta operando
             matrizAumentada[i + 1] = matrizAumentada[i + 1] - (
                 matrizAumentada[filaActual] * pivote
             )
@@ -35,22 +61,17 @@ def gaussJordan(A, b):
         filaActual = filaActual + 1
         columnaActual = columnaActual + 1
 
-    A = matrizAumentada[:, :nColumnas]
-    b = matrizAumentada[:, nColumnas:]
+    Ax = matrizAumentada[:, :nColumnas]
+    bx = matrizAumentada[:, nColumnas:]
 
     while nFilas > 0:
         # Se extrea la lista de las inconitas ya encontradas
-        xi = b[nFilas:]
-        # Se multiplica  las incognitas ya encontradas  en las filas para allar el resto de ellas
-        mul = np.dot(A[nFilas - 1, nFilas:], xi)
+        xi = bx[nFilas:]
+        # Se multiplica  las incognitas ya encontradas  en las filas para hallar el resto de ellas
+        mul = np.dot(Ax[nFilas - 1, nFilas:], xi)
 
         # Se despeja el resultado para encontra el valor de la incognita xi
-        b[nFilas - 1] = b[nFilas - 1] + (mul * -1)
+        bx[nFilas - 1] = bx[nFilas - 1] + (mul * -1)
         nFilas = nFilas - 1
 
-    return b
-
-
-# A = [[3, -0.1, -0.2], [0.1, 7, -0.3], [0.3, -0.2, 10]]
-# b = [[7.85], [-19.3], [71.4]]
-# print(gaussJordan(A, b))
+    return bx
