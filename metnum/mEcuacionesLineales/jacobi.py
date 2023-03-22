@@ -1,5 +1,7 @@
 import numpy as np
 
+# TODO VERIFICAR SI LA MATRIZ QUE SE LE PASA CUMPLE CON LA CONDICION DE DIAGONAL PESADA
+
 
 def jacobi(
     A,
@@ -36,7 +38,7 @@ def jacobi(
     ejemplo #1
 
     >>> jacobi([[6, 2, 1], [-1, 8, 2], [1, -1, 6]], [[25], [-6], [23]], [[0], [0], [0]], 10^-12, 25)
-    [[-4],[-1],[3]]
+    [[4],[-1],[3]]
 
     ejemplo #2
     >>> jacobi([[3, -0.1, -0.2], [0.1, 7, -0.3], [0.3, -0.2, 10]],[[7.85], [-19.3], [71.4]],[[0], [0], [0]],10^-12, 25 )
@@ -73,3 +75,7 @@ def jacobi(
     vectorSolucion = mIncognitas[iteracion]
 
     return vectorSolucion
+
+
+print(jacobi([[6, 2, 1], [-1, 8, 2], [1, -1, 6]],
+      [[25], [-6], [23]], [[0], [0], [0]], 10 ^ -12, 25))
