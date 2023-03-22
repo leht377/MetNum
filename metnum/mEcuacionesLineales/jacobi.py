@@ -1,6 +1,5 @@
 import numpy as np
-
-# TODO VERIFICAR SI LA MATRIZ QUE SE LE PASA CUMPLE CON LA CONDICION DE DIAGONAL PESADA
+from .helpers import es_diagonal_dominante
 
 
 def jacobi(
@@ -48,9 +47,15 @@ def jacobi(
     A = np.array(A)
     b = np.array(b)
 
-    # diag tiene el siguiente comportamiento si se le pasa solo un vector [..,..,..] este contruira una matriz con estos valores como diagonal
+    if not (es_diagonal_dominante(A)):
+        raise ValueError(
+            "La diagonal de la matriz coeficientes A debe de ser dominante")
+
+    # 1. np.diag tiene el siguiente comportamiento si se le pasa solo un vector [..,..,..] este contruira una matriz con estos valores como diagonal
     # y el resto sera 0
-    # El segundo comportamiento si se le pasa una matriz extraera solo los elementos de la diagonal
+
+    # 2. El segundo comportamiento si se le pasa una matriz extraera solo los elementos de la diagonal
+
     # Crea una matriz solo con los elementos de la diagonal de la matriz A el resto de las posiciones las llena con 0
     D = np.diag(np.diag(A))
     R = A.copy()
@@ -75,7 +80,3 @@ def jacobi(
     vectorSolucion = mIncognitas[iteracion]
 
     return vectorSolucion
-
-
-print(jacobi([[6, 2, 1], [-1, 8, 2], [1, -1, 6]],
-      [[25], [-6], [23]], [[0], [0], [0]], 10 ^ -12, 25))

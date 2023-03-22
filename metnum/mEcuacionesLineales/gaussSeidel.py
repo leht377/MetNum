@@ -1,6 +1,9 @@
 import numpy as np
 
 from .decoradores import args_types_checking_gauss_seidel
+from .helpers import es_diagonal_dominante
+
+# TODO VERIFICAR SI LA MATRIZ QUE SE LE PASA ES cuadrada
 
 
 @args_types_checking_gauss_seidel
@@ -51,6 +54,10 @@ def gaussSeidel(
     A = np.array(A)
     b = np.array(b)
     x = np.array(x0, dtype=float)
+
+    if not (es_diagonal_dominante(A)):
+        raise ValueError(
+            "La diagonal de la matriz coeficientes A debe de ser dominante")
 
     n = len(A)
     normb = np.linalg.norm(b)
