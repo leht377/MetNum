@@ -22,6 +22,16 @@ def sustprogr(T, c):
     return x
 
 
+def es_matriz_cuadrada(matriz):
+    matriz = np.array(matriz)
+    fila, columna = matriz.shape
+
+    if fila == columna:
+        return True
+
+    return False
+
+
 def es_diagonal_dominante(matriz):
     matriz = np.array(matriz)
     fila = matriz.shape[1]
