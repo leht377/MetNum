@@ -1,6 +1,10 @@
 import numpy as np
 from .helpers import sustprogr, sustregr
 
+# TODO revisar codigo en la obtencion de L, U
+# TODO realizar documentacion del metodo
+# TODO realizar cheking de tipos de datos del metodo
+
 
 def LU(A, b):
     A = np.array(A)
@@ -11,24 +15,22 @@ def LU(A, b):
 
     aux[0][0] = A[0][0]
 
-    if aux[0][0] == 0:
-        print("No")
-        return 0
+    if aux[0][0] == 0:  # TODO Hacer exepciones
+        raise ValueError("No se puede realizar la factorizacion LU")
 
-    for s in range(1, n):
+    for i in range(1, n):
 
-        aux[0][s] = A[0][s]
-        aux[s][0] = np.divide(A[s][0], aux[0][0])
+        aux[0][i] = A[0][i]
+        aux[i][0] = np.divide(A[i][0], aux[0][0])
 
-    for r in range(1, n):
+    for j in range(1, n):
 
-        aux[r][r] = A[r][r] - (np.dot(aux[r, :r], aux[:r, r]))
-        if aux[r][r] == 0:
-            print("lazar error")
-            return 0
-        for s in range(r + 1, n):
-            aux[r][s] = A[r][s] - np.dot(aux[r, :r], aux[:r, s])
-            aux[s][r] = (A[s][r] - np.dot(aux[s, :r], aux[:r, r])) / aux[r][r]
+        aux[j][j] = A[j][j] - (np.dot(aux[j, :j], aux[:j, j]))
+        if aux[j][j] == 0:
+            raise ValueError("No se puede realizar la factorizacion LU")
+        for i in range(j + 1, n):
+            aux[j][i] = A[j][i] - np.dot(aux[j, :j], aux[:j, i])
+            aux[i][j] = (A[i][j] - np.dot(aux[i, :j], aux[:j, j])) / aux[j][j]
 
     L = np.tril(aux, -1) + np.eye(n)
     U = np.triu(aux)
