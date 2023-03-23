@@ -1,7 +1,9 @@
 import numpy as np
 from .helpers import es_diagonal_dominante
+from .decoradores import jacobi_args_types_checking
 
 
+@jacobi_args_types_checking
 def jacobi(
     A,
     b: list,
@@ -36,16 +38,21 @@ def jacobi(
 
     ejemplo #1
 
-    >>> jacobi([[6, 2, 1], [-1, 8, 2], [1, -1, 6]], [[25], [-6], [23]], [[0], [0], [0]], 10^-12, 25)
+    >>> jacobi([[6, 2, 1], [-1, 8, 2], [1, -1, 6]], [[25], [-6], [23]], [[0], [0], [0]], 10**-12, 25)
     [[4],[-1],[3]]
 
     ejemplo #2
-    >>> jacobi([[3, -0.1, -0.2], [0.1, 7, -0.3], [0.3, -0.2, 10]],[[7.85], [-19.3], [71.4]],[[0], [0], [0]],10^-12, 25 )
+    >>> jacobi([[3, -0.1, -0.2], [0.1, 7, -0.3], [0.3, -0.2, 10]],[[7.85], [-19.3], [71.4]],[[0], [0], [0]],10**-12, 25 )
     [[3.],[-2.5],[7.]]
 
     """
     A = np.array(A)
     b = np.array(b)
+
+    if b.ndim == 1:
+        b = b.reshape(b.shape[0], 1)
+    if x0.ndim == 1:
+        x0 = x0.reshape(x0.shape[0], 1)
 
     if not (es_diagonal_dominante(A)):
         raise ValueError(

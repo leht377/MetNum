@@ -2,7 +2,7 @@ import numpy as np
 
 
 # TODO Realizar verificacion de tipos de datos en parametros
-
+# TODO Refactor de args_np_array
 def gaussJordan(A: list, b: list):
     """
     Esta funcion resuelve sistemas de ecuaciones lineales Ax=b usando el método de Gauss-Jordan
@@ -34,6 +34,8 @@ def gaussJordan(A: list, b: list):
     A = np.array(A)
     b = np.array(b)
 
+    if b.ndim == 1:
+        b = b.reshape(b.shape[0], 1)
     # Creamos la matriz aumentada
     matrizAumentada = np.concatenate((A, b), axis=1, dtype=float)
 
