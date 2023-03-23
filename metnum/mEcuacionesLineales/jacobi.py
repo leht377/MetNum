@@ -1,9 +1,11 @@
 import numpy as np
 from .helpers import es_diagonal_dominante
 from .decoradores import jacobi_args_types_checking
+# TODO implementer jacobi_args_types_checking
+
+# @jacobi_args_types_checking
 
 
-@jacobi_args_types_checking
 def jacobi(
     A,
     b: list,
@@ -48,7 +50,7 @@ def jacobi(
     """
     A = np.array(A)
     b = np.array(b)
-
+    x0 = np.array(x0, dtype=float)
     if b.ndim == 1:
         b = b.reshape(b.shape[0], 1)
     if x0.ndim == 1:
