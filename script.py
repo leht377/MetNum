@@ -15,7 +15,7 @@ from metnum import (
 
 # Creamos una lista de resultados
 resultados = [[3, 5, 6, 7]]
-
+print(biseccion(lambda x: x**2 + 3*x - 34, 3, 5, 10**-6, True))
 # Imprimimos la lista en forma de tabla
 
 
@@ -80,11 +80,11 @@ resultados = [[3, 5, 6, 7]]
 # A = [[3, 2, -1], [2, -2, 4], [-1, 0.5, -1]]
 # b = [[1], [-2], [0]]
 
-A = [[-3, 3, 2], [4, 1, -1], [1, -2, 1]]
-b = np.array([[1], [2], [3]])
+# A = [[-3, 3, 2], [4, 1, -1], [1, -2, 1]]
+# b = np.array([[1], [2], [3]])
 
-print(gaussSeidel([[3, -0.1, -0.2], [0.1, 7, -0.3], [0.3, -0.2, 10]],
-      [7.85, -19.3, 71.4], [0, 0, 0]))
+# print(gaussSeidel([[3, -0.1, -0.2], [0.1, 7, -0.3], [0.3, -0.2, 10]],
+#       [7.85, -19.3, 71.4], [0, 0, 0]))
 
 
 # def comprobacion(A, b, res):
