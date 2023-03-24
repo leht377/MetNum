@@ -3,8 +3,6 @@ import numpy as np
 from .decoradores import gaussSeidel_args_types_checking, gaussSeidel_args_transform_np_array
 from .helpers import es_diagonal_dominante, es_matriz_cuadrada
 
-# TODO VERIFICAR SI LA MATRIZ QUE SE LE PASA ES cuadrada
-
 
 @gaussSeidel_args_types_checking
 @gaussSeidel_args_transform_np_array

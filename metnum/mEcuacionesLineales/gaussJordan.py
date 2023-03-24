@@ -1,8 +1,11 @@
 import numpy as np
-
+from .helpers import es_matriz_cuadrada
+from .decoradores import gaussJordan_args_transform_np_array
 
 # TODO Realizar verificacion de tipos de datos en parametros
-# TODO Refactor de args_np_array
+
+
+@gaussJordan_args_transform_np_array
 def gaussJordan(A: list, b: list):
     """
     Esta funcion resuelve sistemas de ecuaciones lineales Ax=b usando el método de Gauss-Jordan
@@ -31,11 +34,10 @@ def gaussJordan(A: list, b: list):
     """
 
     # Convertimos las lista en matrices de numpy
-    A = np.array(A)
-    b = np.array(b)
 
-    if b.ndim == 1:
-        b = b.reshape(b.shape[0], 1)
+    if not (es_matriz_cuadrada(A)):
+        raise ValueError("La matriz A debe de ser cuadrada")
+
     # Creamos la matriz aumentada
     matrizAumentada = np.concatenate((A, b), axis=1, dtype=float)
 

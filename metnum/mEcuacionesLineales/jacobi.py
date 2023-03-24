@@ -1,11 +1,12 @@
 import numpy as np
-from .helpers import es_diagonal_dominante
-from .decoradores import jacobi_args_types_checking
+from .helpers import es_diagonal_dominante, es_matriz_cuadrada
+from .decoradores import jacobi_args_types_checking, jacobi_args_transform_np_array
 # TODO implementer jacobi_args_types_checking
 
 # @jacobi_args_types_checking
 
 
+@jacobi_args_transform_np_array
 def jacobi(
     A,
     b: list,
@@ -48,13 +49,9 @@ def jacobi(
     [[3.],[-2.5],[7.]]
 
     """
-    A = np.array(A)
-    b = np.array(b)
-    x0 = np.array(x0, dtype=float)
-    if b.ndim == 1:
-        b = b.reshape(b.shape[0], 1)
-    if x0.ndim == 1:
-        x0 = x0.reshape(x0.shape[0], 1)
+
+    if not (es_matriz_cuadrada(A)):
+        raise ValueError("La matriz A debe de ser cuadrada")
 
     if not (es_diagonal_dominante(A)):
         raise ValueError(
