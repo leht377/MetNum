@@ -7,7 +7,7 @@ def reglaFalsa(
     f,
     intervaloA: int or float,
     intervaloB: int or float,
-    tolerancia: int or float,
+    tolerancia: int or float = 10**-6,
     plot: bool = False,
 ) -> tuple:
     """

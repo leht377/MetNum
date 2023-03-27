@@ -7,7 +7,7 @@ def biseccion(
     f,
     intervaloA: int or float,
     intervaloB: int or float,
-    tolerancia: float or int,
+    tolerancia: float or int = 10**-6,
     plot: bool = False,
 ) -> tuple:
     """
@@ -53,7 +53,8 @@ def biseccion(
     """
 
     if f(intervaloA) * f(intervaloB) > 0:
-        raise ValueError(f"No hay raiz en el intervalo [{intervaloA}, {intervaloB}]")
+        raise ValueError(
+            f"No hay raiz en el intervalo [{intervaloA}, {intervaloB}]")
 
     aproxNueva = (intervaloA + intervaloB) / 2
     errorRelativo = 1000

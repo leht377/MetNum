@@ -5,8 +5,8 @@ def newtonRapson(
     f,
     fDerivadax,
     puntoInicial: int or float,
-    toleracia: int or float,
-    maximoInteraciones: int or float,
+    toleracia: int or float = 10**-6,
+    maximoInteraciones: int or float = 100,
     plot: bool = False,
 ) -> tuple:
     """
