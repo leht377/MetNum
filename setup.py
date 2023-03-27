@@ -14,7 +14,7 @@ DESCRIPTION = "Aquí debes incluir una descripción corta de la librería"
 LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding="utf-8")
 LONG_DESC_TYPE = "text/markdown"
 
-INSTALL_REQUIRES = ["numpy"]
+INSTALL_REQUIRES = ["numpy", "matplotlib"]
 
 setup(
     name=PACKAGE_NAME,

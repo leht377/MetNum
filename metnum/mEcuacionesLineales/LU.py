@@ -9,7 +9,8 @@ from .helpers import sustprogr, sustregr
 def LU(A, b):
     A = np.array(A)
     b = np.array(b)
-
+    if b.ndim == 1:
+        b = b.reshape(b.shape[0], 1)
     n = len(A)
     aux = np.zeros((n, n), dtype=float)
 

@@ -14,8 +14,7 @@ from metnum import (
 
 
 # Creamos una lista de resultados
-resultados = [[3, 5, 6, 7]]
-print(biseccion(lambda x: x**2 + 3*x - 34, 3, 5, 10**-6, True))
+
 # Imprimimos la lista en forma de tabla
 
 
@@ -87,7 +86,20 @@ print(biseccion(lambda x: x**2 + 3*x - 34, 3, 5, 10**-6, True))
 #       [7.85, -19.3, 71.4], [0, 0, 0]))
 
 
+A = [[2, 6, 4, 4, 2, 8], [5, 4, 2, 7, 3, 4], [3, 7, 4, 4, 5, 6],
+     [5, 2, 1, 2, 2, 2], [2, 3, 3, 4, 4, 4], [3, 1, 1, 3, 1, 8]]
+b = [54, 61.5, 68, 34.5, 50.5, 33]
+# print(gaussJordan(A, b))
+
+
+# print(LU(A, b))
+# Guardamos el tiempo después de la ejecución de la función
+
 # def comprobacion(A, b, res):
 #     vectorInconitasResueltas = np.sum(
 #         (A * res), axis=1).reshape((3, 1))
 #     return np.allclose(vectorInconitasResueltas, b)
+
+
+# print(comprobacion(A, b, gaussJordan(A, b)))
+biseccion(lambda x: x**2 + 3*x - 34, 3, 5, 10**-6, True)
