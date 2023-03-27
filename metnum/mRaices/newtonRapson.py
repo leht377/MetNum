@@ -1,6 +1,8 @@
 from .plot import plot_newtonRapon
+from .decoradores import args_type_checking_newtonRapson
 
 
+@args_type_checking_newtonRapson
 def newtonRapson(
     f,
     fDerivadax,
@@ -37,9 +39,9 @@ def newtonRapson(
     Ejemplo
     --------
     >>> newtonRapson( lambda x: x**3 - 2 * x + 2,
-                  lambda x: 3 * x**2 - 2, 0, 10**-6, 40, True,
-    ),
-     (0.0, 1.0, 2.0)
+                  lambda x: 3 * x**2 - 2, -1, 10**-6, 40, True,
+    )
+     (-1.7692923542973595, 4.340705572758452e-10, 7)
 
     """
     interaciones = 0

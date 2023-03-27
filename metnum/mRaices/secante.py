@@ -1,6 +1,8 @@
 from .plot import plot_secante
+from .decoradores import args_type_checking_secante
 
 
+@args_type_checking_secante
 def secante(
     f,
     aproximacion0: int or float,

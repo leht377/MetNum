@@ -1,1 +1,1 @@
-from .types_cheking import args_type_checking
+from .types_cheking import args_type_checking, args_type_checking_secante, args_type_checking_newtonRapson
