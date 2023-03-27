@@ -5,8 +5,8 @@ def secante(
     f,
     aproximacion0: int or float,
     aproximacion1: int or float,
-    tolerancia: int or float,
-    maximoInteraciones: int or float,
+    tolerancia: int or float = 10**-6,
+    maximoInteraciones: int or float = 100,
     plot: bool = False,
 ) -> tuple:
     """
@@ -20,9 +20,9 @@ def secante(
                    valor de partida para la aproximación de la raíz.
     aproximacion1: int or float
                    segundo valor de partidapara la aproximación de la raíz
-    tolerancia: int or float
+    (Opcional) tolerancia: int or float
                 valor mínimo de la función en la raíz que se considera suficiente para detener la búsqueda.
-    maximoInteraciones: int or float
+    (Opcional) maximoInteraciones: int or float
                         Número de interaciones máximas permitidas.
     (Opcional)  plot: bool
        Ver graficamente el metodo de la secante.
@@ -36,7 +36,7 @@ def secante(
      Ejemplo
      ---------
 
-    >>> secante(lambda x: x**2 - 2, 1, 2, 1e-6, 100, True),
+    >>> secante(lambda x: x**2 - 2, 1, 2, 12**-6, 100, True),
                (1.4142135623730954, 8.881784197001252e-16, 6)
 
 
