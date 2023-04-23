@@ -45,7 +45,7 @@ def reglaFalsa(
 
     ejemplo:
     --------
-    >>> regla falsa (lambda x: math.exp(3 * x) - 4, 0, 1, 10**-6)
+    >>> reglaFalsa (lambda x: math.exp(3 * x) - 4, 0, 1, 10**-6)
     (0.46209811446609667, 8.567878429991425e-07, 35)
     """
     iteraciones = 0
