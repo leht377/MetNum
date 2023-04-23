@@ -1,6 +1,23 @@
 from numpy import array
 
 
+def gaussJordan_args_types_checking(fn):
+    def wrapper(*args):
+        argumentos = {
+            "A": args[0],
+            "b": args[1],
+        }
+
+        if not isinstance(argumentos["A"], (list)):
+            raise TypeError("La matriz A deben ser de tipo list")
+
+        if not isinstance(argumentos["b"], (list)):
+            raise TypeError("La matriz b deben ser de tipo list")
+        return fn(*args)
+
+    return wrapper
+
+
 def gaussJordan_args_transform_np_array(fn):
     def wrapper(*args):
 

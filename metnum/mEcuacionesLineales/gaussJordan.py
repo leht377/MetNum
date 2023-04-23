@@ -1,10 +1,9 @@
 import numpy as np
 from .helpers import es_matriz_cuadrada
-from .decoradores import gaussJordan_args_transform_np_array
-
-# TODO Realizar verificacion de tipos de datos en parametros
+from .decoradores import gaussJordan_args_transform_np_array, gaussJordan_args_types_checking
 
 
+@gaussJordan_args_types_checking
 @gaussJordan_args_transform_np_array
 def gaussJordan(A: list, b: list):
     """
@@ -32,8 +31,6 @@ def gaussJordan(A: list, b: list):
     >>> gaussJordan([[3, -0.1, -0.2], [0.1, 7, -0.3], [0.3, -0.2, 10]],[[7.85], [-19.3], [71.4]])
     [[3.],[-2.5],[7.]]
     """
-
-    # Convertimos las lista en matrices de numpy
 
     if not (es_matriz_cuadrada(A)):
         raise ValueError("La matriz A debe de ser cuadrada")
