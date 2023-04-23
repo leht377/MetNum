@@ -1,5 +1,8 @@
-# MetNum
+# MetNum 📚
 
+MetNum es una libreria de métodos numéricos, los métodos numéricos son una herramienta esencial para los científicos y matemáticos que necesitan resolver problemas que no se pueden resolver mediante métodos analíticos tradicionales. En lugar de obtener soluciones exactas, los métodos numéricos utilizan cálculos aproximados para encontrar soluciones que se acercan lo suficiente a la respuesta real.
+
+Esta libreria incluye los siguientes modulos:
 
 
 * Métodos para encontrar raíces de funciones.
@@ -9,7 +12,7 @@
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install metnum.
 
 ```bash
 
