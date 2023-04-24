@@ -1,7 +1,6 @@
 import pytest
 from numpy import testing
 from metnum import gaussSeidel
-#TODO test args_types
 
 
 @pytest.mark.parametrize(
@@ -54,4 +53,52 @@ def test_matriz_no_cuadrada(A, b, x0, expected):
 def test_matriz_diagonal_dominantes(A, b, x0, expected):
     with pytest.raises(ValueError) as context:
         gaussSeidel(A, b, x0)
+    assert expected in str(context.value)
+
+
+@pytest.mark.parametrize(
+    "A, b, x0, tol, maxiter, expected", [
+        (
+            " [[6, 2, 1], [-1, 8, 2], [1, -1, 6]]",
+            [[25], [-6], [23]],
+            [[0], [0], [0]],
+            10**-12,
+            25,
+            "La matriz A deben ser de tipo list"),
+        (
+            [[6, 2, 1], [-1, 8, 2], [1, -1, 6]],
+            "[[25], [-6], [23]]",
+            [[0], [0], [0]],
+            10**-12,
+            25,
+            "La matriz b deben ser de tipo list"
+        ),
+        (
+            [[6, 2, 1], [-1, 8, 2], [1, -1, 6]],
+            [[25], [-6], [23]],
+            "[[0], [0], [0]]",
+            10**-12,
+            25,
+            "La x0 A deben ser de tipo list"
+        ),
+        (
+            [[6, 2, 1], [-1, 8, 2], [1, -1, 6]],
+            [[25], [-6], [23]],
+            [[0], [0], [0]],
+            "10**-12",
+            25,
+            "La tolerancia debe de ser de tipo entero o float"
+        ),
+        (
+            [[6, 2, 1], [-1, 8, 2], [1, -1, 6]],
+            [[25], [-6], [23]],
+            [[0], [0], [0]],
+            10**-12,
+            "25",
+            "El numero maximo de iteraciones debe de ser de tipo entero"
+        )
+    ])
+def test_args_types_checking(A, b, x0, tol, maxiter, expected):
+    with pytest.raises(TypeError) as context:
+        gaussSeidel(A, b, x0, tol, maxiter)
     assert expected in str(context.value)
