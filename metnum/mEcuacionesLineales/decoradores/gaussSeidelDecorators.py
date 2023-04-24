@@ -34,7 +34,6 @@ def gaussSeidel_args_types_checking(fn):
         return fn(*args)
 
     return wrapper
-# TODO Esto de abajo
 
 
 def gaussSeidel_args_transform_np_array(fn):

@@ -1,11 +1,9 @@
 import numpy as np
 from .helpers import es_diagonal_dominante, es_matriz_cuadrada
 from .decoradores import jacobi_args_types_checking, jacobi_args_transform_np_array
-# TODO implementer jacobi_args_types_checking
-
-# @jacobi_args_types_checking
 
 
+@jacobi_args_types_checking
 @jacobi_args_transform_np_array
 def jacobi(
     A,

@@ -1,5 +1,6 @@
 from .plot import plot_secante
 from .decoradores import args_type_checking_secante
+# TODO SECANTE PROBLEMA DIVISION CON CERO
 
 
 @args_type_checking_secante
