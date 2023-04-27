@@ -5,3 +5,4 @@ metnum.egg-info
 dist
 build
 install.py
+test.csv
