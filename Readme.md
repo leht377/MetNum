@@ -4,11 +4,10 @@ MetNum es una libreria de métodos numéricos, los métodos numéricos son una h
 
 Esta libreria incluye los siguientes modulos:
 
-
-* Métodos para encontrar raíces de funciones.
-* Métodos para resolver sistemas de ecuaciones lineales.
-* Métodos de interpolación.
-* Métodos de valores propios y vectores propios.
+- Métodos para encontrar raíces de funciones.
+- Métodos para resolver sistemas de ecuaciones lineales.
+- Métodos de interpolación.
+- Métodos de valores propios y vectores propios.
 
 ## Installation
 
@@ -18,16 +17,22 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install metnum.
 
 ```
 
+## Run Test
+
+```bash
+pytest tests
+```
+
 ## Usage
 
 ### Métodos para encontrar raíces
 
-La librería contiene varios métodos para encontrar raíces de funciones, incluyendo:
+La librería contiene varios métodos para encontrar raíces de funciones, los cuales son:
 
-* Método de la bisección.
-* Método de Newton-Raphson.
-* Método de la secante.
-* Método de la Regla Falsa.
+- Método bisección.
+- Método de Newton-Raphson.
+- Método de la secante.
+- Método de la Regla Falsa.
 
 ```python
 import metnum.mRaices as r
@@ -49,7 +54,7 @@ r.newtonRapson(lambda x: x**3 - 2 * x + 2,lambda x: 3 * x**2 - 2, -1, 10**-6, 40
 r.secante(lambda x: x**3 - x**2, 4, 8, 10**-6, 50)
 ```
 
-##### Componente grafico 
+##### Componente grafico
 
 <div style="display:flex">
   <img src="https://github.com/leht377/pagina_web/blob/master/Biseccion.png?raw=true" alt="Screenshot of biseccion" width="300px">
@@ -58,41 +63,29 @@ r.secante(lambda x: x**3 - x**2, 4, 8, 10**-6, 50)
   <img src="https://github.com/leht377/pagina_web/blob/master/secante.png?raw=true" alt="Screenshot of secante" width="300px">
 </div>
 
-### Métodos para resolver sistemas de ecuaciones lineales 
+### Métodos para resolver sistemas de ecuaciones lineales
 
+La librería cuenta con los siguientes métodos para solucionar sistemas de ecuaciones lineales de la forma Ax = b.
 
+```python
+import metnum.mEcuacionesLineales as ln
 
+# returns ([[4],[-1],[3]])
+ln.gaussJordan([[6, 2, 1], [-1, 8, 2], [1, -1, 6]], [[25], [-6], [23]])
 
+# returns ([[-4],[-1],[3]])
+ln.gaussSeidel([[6, 2, 1], [-1, 8, 2], [1, -1, 6]], [[25], [-6], [23]], [[0], [0], [0]],10**-12, 25)
 
+# returns ([[4],[-1],[3]])
+ln.jacobi([[6, 2, 1], [-1, 8, 2], [1, -1, 6]], [[25], [-6], [23]], [[0], [0], [0]], 10**-12, 25)
+
+# returns ([[4],[-1],[3]])
+ln.LU([[6, 2, 1], [-1, 8, 2], [1, -1, 6]], [[25], [-6], [23]])
+```
 
 ### Métodos de interpolación
+
 ### Métodos de valores propios y vectores propios
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- Librería de Métodos Numéricos en Python
 Esta es una librería de Python que contiene implementaciones de diversos métodos numéricos utilizados en la resolución de problemas matemáticos y científicos. Los métodos implementados incluyen métodos de integración numérica, métodos de diferenciación numérica, métodos de solución de ecuaciones diferenciales ordinarias, métodos de solución de ecuaciones no lineales, entre otros.
