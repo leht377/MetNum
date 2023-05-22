@@ -5,10 +5,10 @@ from .decoradores import args_type_checking_secante
 @args_type_checking_secante
 def secante(
     f,
-    aproximacion0: int or float,
-    aproximacion1: int or float,
+    x0: int or float,
+    x1: int or float,
     tolerancia: int or float = 10**-6,
-    maximoInteraciones: int or float = 100,
+    maxIter: int or float = 100,
     plot: bool = False,
 ) -> tuple:
     """
@@ -18,14 +18,14 @@ def secante(
     ------------
     f: function
        función a la que se busca aproximar la raíz.
-    aproximacion0: int or float
-                   valor de partida para la aproximación de la raíz.
-    aproximacion1: int or float
-                   segundo valor de partidapara la aproximación de la raíz
+    x0: int or float
+        valor de partida para la aproximación de la raíz.
+    x1: int or float
+        segundo valor de partida para la aproximación de la raíz
     (Opcional) tolerancia: int or float
-                valor mínimo de la función en la raíz que se considera suficiente para detener la búsqueda.
-    (Opcional) maximoInteraciones: int or float
-                        Número de interaciones máximas permitidas.
+        valor mínimo de la función en la raíz que se considera suficiente para detener la búsqueda.
+    (Opcional) maxIter: int or float
+        Número de interaciones máximas permitidas.
     (Opcional)  plot: bool
        Ver graficamente el metodo de la secante.
 
@@ -38,43 +38,43 @@ def secante(
      Ejemplo
      ---------
 
-    >>> secante(lambda x: x**2 - 2, 1, 2, 12**-6, 100, True),
-               (1.4142135623730954, 8.881784197001252e-16, 6)
+    >>> secante(lambda x: x**2 - 2, 1, 2, 12**-6, 100, False)
+    (1.4142135623730954, 8.881784197001252e-16, 6)
 
 
 
     """
 
     iteraciones = 1
-    dfsuc = aproximacion1 - aproximacion0
-    aproximacionNueva0 = aproximacion0
-    aproximacionNueva1 = aproximacion1
+    dfsuc = x1 - x0  # Diferencia sucesiva entre las dos aproximaciones
+    aproxAnterior = x0
+    aproxActual = x1
 
-    f_de_aproximacioNueva0 = f(aproximacionNueva0)
-    f_de_aproximacionNueva1 = f(aproximacionNueva1)
+    f_aproxAnterior = f(aproxAnterior)
+    f_aproxActual = f(aproxActual)
 
     if plot:
-        HistorialAproximacion0 = [aproximacionNueva0]
-        HistorialAproximacion1 = [aproximacionNueva1]
+        h_aproxAnterior = [aproxAnterior]
+        h_aproxActual = [aproxActual]
 
-    while abs(dfsuc) >= tolerancia and iteraciones <= maximoInteraciones:
+    while abs(dfsuc) >= tolerancia and iteraciones <= maxIter:
         iteraciones = iteraciones + 1
-        dfsuc = (
-            f_de_aproximacionNueva1
-            * (aproximacionNueva1 - aproximacionNueva0)
-            / (f_de_aproximacionNueva1 - f_de_aproximacioNueva0)
+        dfsuc = (  # Diferencia sucesiva entre las dos aproximaciones
+            f_aproxActual
+            * (aproxActual - aproxAnterior)
+            / (f_aproxActual - f_aproxAnterior)
         )
-        aproximacionNueva0 = aproximacionNueva1
-        f_de_aproximacioNueva0 = f_de_aproximacionNueva1
-        aproximacionNueva1 = aproximacionNueva1 - dfsuc
-        f_de_aproximacionNueva1 = f(aproximacionNueva1)
+
+        aproxAnterior = aproxActual
+        f_aproxAnterior = f_aproxActual
+        aproxActual = aproxActual - dfsuc  # Nueva aproximacion
+        f_aproxActual = f(aproxActual)
 
         if plot:
-            HistorialAproximacion0.append(aproximacionNueva0)
-            HistorialAproximacion1.append(aproximacionNueva1)
+            h_aproxAnterior.append(aproxAnterior)
+            h_aproxActual.append(aproxActual)
 
     plot and plot_secante.grafica(
-        f, HistorialAproximacion1, HistorialAproximacion0
-    ).pintarGrafica()
+        f, h_aproxActual, h_aproxAnterior).pintarGrafica()
 
-    return aproximacionNueva1, abs(f_de_aproximacionNueva1), iteraciones - 1
+    return aproxActual, abs(f_aproxActual), iteraciones - 1
