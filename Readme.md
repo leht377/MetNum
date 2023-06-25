@@ -75,17 +75,23 @@ La librería cuenta con los siguientes métodos para solucionar sistemas de ecua
 ```python
 import metnum.mEcuacionesLineales as ln
 
+A = [[6, 2, 1], [-1, 8, 2], [1, -1, 6]]
+b =  [[25], [-6], [23]]
+x0 = [[0], [0], [0]]
+tolerancia = 10**-12
+maxIter = 100
+
 # returns ([[4],[-1],[3]])
-ln.gaussJordan([[6, 2, 1], [-1, 8, 2], [1, -1, 6]], [[25], [-6], [23]])
+ln.gaussJordan(A,b)
 
 # returns ([[-4],[-1],[3]])
-ln.gaussSeidel([[6, 2, 1], [-1, 8, 2], [1, -1, 6]], [[25], [-6], [23]], [[0], [0], [0]],10**-12, 25)
+ln.gaussSeidel(A, b,tolerancia, maxIter)
 
 # returns ([[4],[-1],[3]])
-ln.jacobi([[6, 2, 1], [-1, 8, 2], [1, -1, 6]], [[25], [-6], [23]], [[0], [0], [0]], 10**-12, 25)
+ln.jacobi(A, b,tolerancia, maxIter)
 
 # returns ([[4],[-1],[3]])
-ln.LU([[6, 2, 1], [-1, 8, 2], [1, -1, 6]], [[25], [-6], [23]])
+ln.LU(A, b)
 ```
 
 ### Métodos de interpolación
