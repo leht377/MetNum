@@ -67,6 +67,11 @@ r.secante(lambda x: x**3 - x**2, 4, 8, 10**-6, 50)
 
 La librería cuenta con los siguientes métodos para solucionar sistemas de ecuaciones lineales de la forma Ax = b.
 
+- Método Gauss-Jordan.
+- Método Gauss-Seidel.
+- Método de Jacobi.
+- Método de descomposición LU.
+
 ```python
 import metnum.mEcuacionesLineales as ln
 
