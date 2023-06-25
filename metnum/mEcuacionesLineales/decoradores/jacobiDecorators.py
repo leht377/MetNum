@@ -8,7 +8,7 @@ def jacobi_args_types_checking(fn):
             "A": args[0],
             "b": args[1],
             "x0": args[2],
-            "tol": (args[3]) if len(args) > 3 else 10**-2,
+            "tol": (args[3]) if len(args) > 3 else 10**-12,
             "maxiter": (args[4]) if len(args) > 4 else 25,
         }
 
