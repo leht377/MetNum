@@ -76,27 +76,27 @@ La librería cuenta con los siguientes métodos para solucionar sistemas de ecua
 import metnum.mEcuacionesLineales as ln
 
 A = [[6, 2, 1], [-1, 8, 2], [1, -1, 6]]
-b =  [[25], [-6], [23]]
-x0 = [[0], [0], [0]]
+b =  [25, -6, 23]
+x0 = [0, 0, 0]
 tolerancia = 10**-12
 maxIter = 100
 
 # returns ([[4],[-1],[3]])
-ln.gaussJordan(A,b)
+ln.gaussJordan(A, b)
 
 # returns ([[-4],[-1],[3]])
-ln.gaussSeidel(A, b,tolerancia, maxIter)
+ln.gaussSeidel(A, b, tolerancia, maxIter)
 
 # returns ([[4],[-1],[3]])
-ln.jacobi(A, b,tolerancia, maxIter)
+ln.jacobi(A, b, tolerancia, maxIter)
 
 # returns ([[4],[-1],[3]])
 ln.LU(A, b)
 ```
 
-### Métodos de interpolación
-
 ### Métodos de valores propios y vectores propios
+
+### Métodos de interpolación
 
 <!-- Librería de Métodos Numéricos en Python
 Esta es una librería de Python que contiene implementaciones de diversos métodos numéricos utilizados en la resolución de problemas matemáticos y científicos. Los métodos implementados incluyen métodos de integración numérica, métodos de diferenciación numérica, métodos de solución de ecuaciones diferenciales ordinarias, métodos de solución de ecuaciones no lineales, entre otros.
