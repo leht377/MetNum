@@ -1,3 +1,4 @@
+# TODO hacer decoradores de esta funcion
 def pasoVariable(x: list, y: list, xk: int or float) -> float:
     """
     Esta función encuentra el valor en y a un xk x dado como parametro
@@ -6,9 +7,9 @@ def pasoVariable(x: list, y: list, xk: int or float) -> float:
     Parámetros
     -----------
     x (list): 
-      lista de valores conocidos en x de la funcion f(x).
+      Lista de valores conocidos en x de la funcion f(x).
     y (list): 
-      lista de valores conocidos en y = f(x) para las variables x.
+      Lista de valores conocidos en y = f(x) para las variables x.
     xk (int or float): 
       Valor de x para el cual se desea interpolar.
 
@@ -17,7 +18,7 @@ def pasoVariable(x: list, y: list, xk: int or float) -> float:
     xk (float): 
       valor dependiente de yk para el valor de la variable xk.
 
-    Ejemplo
+    Ejemplos
     ----------
 
     >>> pasoVariable([0, 1, 2, 5], [5, 7, 9, 15], 3)
