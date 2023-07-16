@@ -1,0 +1,1 @@
+from .pasoConstanteDecorators import pasoConstante_args_types_checking, verificar_rango_inversion
