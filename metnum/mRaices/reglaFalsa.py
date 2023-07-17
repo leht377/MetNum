@@ -5,9 +5,9 @@ from .plot import plot_reglaFalsa
 @args_type_checking
 def reglaFalsa(
     f,
-    intervaloA: int or float,
-    intervaloB: int or float,
-    tolerancia: int or float = 10**-6,
+    intervaloA: int | float,
+    intervaloB: int | float,
+    tolerancia: int | float = 10**-6,
     plot: bool = False,
 ) -> tuple:
     """
@@ -96,11 +96,9 @@ def reglaFalsa(
             historial_B.append(intervaloB)
             historial_Raiz.append(aproxNueva)
 
-    # if plot:
-    #     plot_reglaFalsa.paint_plot(f, historial_A, historial_B, historial_Raiz)
-
-    plot and plot_reglaFalsa.grafica(
-        f, historial_A, historial_B, historial_Raiz
-    ).pintarGrafica()
+    if plot:
+        plot_reglaFalsa.grafica(
+            f, historial_A, historial_B, historial_Raiz
+        ).pintarGrafica()
 
     return aproxNueva, errorRelativo, iteraciones
