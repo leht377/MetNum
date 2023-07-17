@@ -5,9 +5,9 @@ from .plot import plot_biseccion_manual, plot_biseccion
 @args_type_checking
 def biseccion(
     f,
-    intervaloA: int or float,
-    intervaloB: int or float,
-    tolerancia: float or int = 10**-6,
+    intervaloA: int | float,
+    intervaloB: int | float,
+    tolerancia: float | int = 10**-6,
     plot: bool = False,
 ) -> tuple:
     """
