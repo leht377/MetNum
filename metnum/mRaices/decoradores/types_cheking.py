@@ -52,8 +52,8 @@ def args_type_checking_secante(fn):
         if not isinstance(argumentos["tolerancia"], (int, float)):
             raise TypeError("La toleracia deben ser entero o float")
 
-        if not isinstance(argumentos["maximoInteraciones"], (int, float)):
-            raise TypeError("maximoInteraciones deben ser entero o float")
+        if not isinstance(argumentos["maximoInteraciones"], (int)):
+            raise TypeError("maximoInteraciones deben ser entero")
 
         if not isinstance(argumentos["plot"], (bool)):
             raise TypeError("Plot debe de ser de tipo bool")
@@ -85,8 +85,8 @@ def args_type_checking_newtonRapson(fn):
         if not isinstance(argumentos["tolerancia"], (int, float)):
             raise TypeError("La toleracia deben ser entero o float")
 
-        if not isinstance(argumentos["maximoInteraciones"], (int, float)):
-            raise TypeError("maximoInteraciones deben ser entero o float")
+        if not isinstance(argumentos["maximoInteraciones"], (int)):
+            raise TypeError("maximoInteraciones deben ser entero")
 
         if not isinstance(argumentos["plot"], (bool)):
             raise TypeError("Plot debe de ser de tipo bool")
