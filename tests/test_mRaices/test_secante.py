@@ -35,7 +35,7 @@ def test_laza_TypeError_si_f_no_es_una_funcion():
         (lambda x: x**2 - 2, 1, 2, "12**-6", 100, False,
          "La toleracia deben ser entero o float"),
         (lambda x: x**2 - 2, 1, 2, 12**-6, "100", False,
-         "maximoInteraciones deben ser entero o float"),
+         "maximoInteraciones deben ser entero"),
         (lambda x: x**2 - 2, 1, 2, 12**-6, 100,
          "False", "Plot debe de ser de tipo bool"),
 

@@ -7,8 +7,8 @@ def secante(
     f,
     x0: int or float,
     x1: int or float,
-    tolerancia: int or float = 10**-6,
-    maxIter: int or float = 100,
+    tolerancia: int | float = 10**-6,
+    maxIter: int = 100,
     plot: bool = False,
 ) -> tuple:
     """
