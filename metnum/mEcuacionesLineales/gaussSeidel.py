@@ -7,10 +7,10 @@ from .helpers import es_diagonal_dominante, es_matriz_cuadrada
 @gaussSeidel_args_types_checking
 @gaussSeidel_args_transform_np_array
 def gaussSeidel(
-    A: list[float],
-    b: list[float],
-    x0: list[float],
-    tol: int or float = pow(10, -12),
+    A: list,
+    b: list,
+    x0: list,
+    tol: float = pow(10, -12),
     maxiter: int = 25,
 ) -> list:
     """
