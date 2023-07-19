@@ -33,9 +33,9 @@ def pasoVariable(x: list, y: list, xk: int or float) -> float:
     yk = 0.0
 
     for i in range(n):
-        lagrange = y[i]
+        lagrange = 1
         for j in range(n):
             if i != j:
                 lagrange *= (xk - x[j]) / (x[i] - x[j])
-        yk += lagrange
+        yk += lagrange * y[i]
     return yk
