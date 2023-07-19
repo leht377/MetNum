@@ -1,5 +1,6 @@
+# TODO agregar **kwargs a wrapper
 def args_type_checking(fn):
-    def wrapper(*args):
+    def wrapper(*args, **kwargs):
 
         argumentos = {
             "f(x)": args[0],
@@ -24,13 +25,13 @@ def args_type_checking(fn):
         if not isinstance(argumentos["plot"], (bool)):
             raise TypeError("Plot debe de ser de tipo bool")
 
-        return fn(*args)
+        return fn(*args, **kwargs)
 
     return wrapper
 
 
 def args_type_checking_secante(fn):
-    def wrapper(*args):
+    def wrapper(*args, **kwargs):
         argumentos = {
             "f(x)": args[0],
             "aproximacion0": args[1],
@@ -58,12 +59,12 @@ def args_type_checking_secante(fn):
         if not isinstance(argumentos["plot"], (bool)):
             raise TypeError("Plot debe de ser de tipo bool")
 
-        return fn(*args)
+        return fn(*args, **kwargs)
     return wrapper
 
 
 def args_type_checking_newtonRapson(fn):
-    def wrapper(*args):
+    def wrapper(*args, **kwargs):
         argumentos = {
             "f(x)": args[0],
             "fDerivadax": args[1],
@@ -85,11 +86,11 @@ def args_type_checking_newtonRapson(fn):
         if not isinstance(argumentos["tolerancia"], (int, float)):
             raise TypeError("La toleracia deben ser entero o float")
 
-        if not isinstance(argumentos["maximoInteraciones"], (int)):
+        if not isinstance(argumentos["maximoInteraciones"], int):
             raise TypeError("maximoInteraciones deben ser entero")
 
         if not isinstance(argumentos["plot"], (bool)):
             raise TypeError("Plot debe de ser de tipo bool")
 
-        return fn(*args)
+        return fn(*args, **kwargs)
     return wrapper
