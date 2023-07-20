@@ -1,10 +1,10 @@
 import numpy as np
-from .decoradores import potencias_args_types_checking, potencias_args_transform_np_array
+from ..decorators import args_types_cheking, args_transform_from_list_to_ndarray
 
 
-@potencias_args_types_checking
-@potencias_args_transform_np_array
-def potencias(A, x, tolerancia: float = 10 ** -12, maxIter: int = 100):
+@args_types_cheking
+@args_transform_from_list_to_ndarray
+def potencias(A: list | np.ndarray, x: list | np.ndarray, tolerancia: float = 10 ** -12, maxIter: int = 100):
     """
     Calcula el autovalor dominante y el autovector asociado utilizando el método de las potencias.
 
@@ -39,6 +39,7 @@ def potencias(A, x, tolerancia: float = 10 ** -12, maxIter: int = 100):
     lambdaviejo = np.random.rand()
     k = 0
     error = 1000
+    lambda_ = []
     while k <= maxIter and error >= tolerancia:
         x = np.dot(A, x) / np.linalg.norm(np.dot(A, x))
         lambda_ = np.dot(np.dot(A, x), x) / np.dot(x, x)
