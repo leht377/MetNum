@@ -1,10 +1,12 @@
-from .decoradores import args_type_checking
+
 from .plot import plot_biseccion_manual, plot_biseccion
+from ..decorators import args_types_cheking
+from typing import Callable
 
 
-@args_type_checking
+@args_types_cheking
 def biseccion(
-    f,
+    f: Callable,
     intervaloA: int | float,
     intervaloB: int | float,
     tolerancia: float | int = 10**-6,
