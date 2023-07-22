@@ -1,15 +1,15 @@
 import numpy as np
 from .helpers import es_diagonal_dominante, es_matriz_cuadrada
-from .decoradores import jacobi_args_types_checking, jacobi_args_transform_np_array
+from ..decorators import transform_np_array, args_types_cheking
 
 
-@jacobi_args_types_checking
-@jacobi_args_transform_np_array
+@args_types_cheking
+@transform_np_array
 def jacobi(
-    A,
-    b: list,
-    x0: list,
-    tol: int | float = pow(10, -12),
+    A: list | np.ndarray,
+    b:  list | np.ndarray,
+    x0:  list | np.ndarray,
+    tol:  float = pow(10, -12),
     maxiter: int = 25,
 ):
     """
@@ -63,7 +63,9 @@ def jacobi(
     # Crea una matriz solo con los elementos de la diagonal de la matriz A el resto de las posiciones las llena con 0
     D = np.diag(np.diag(A))
     R = A.copy()
-    np.fill_diagonal(R, 0)  # Remplaza la diagonal de la matriz por 0
+
+    # Remplaza la diagonal de la matriz por 0
+    np.fill_diagonal(R, 0)  # type: ignore
 
     mIncognitas = np.array([x0], dtype=float)
 
