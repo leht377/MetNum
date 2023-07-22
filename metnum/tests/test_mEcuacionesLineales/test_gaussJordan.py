@@ -1,5 +1,5 @@
 import pytest
-from metnum import gaussJordan
+from ...mEcuacionesLineales import gaussJordan
 import numpy as np
 
 

@@ -1,6 +1,6 @@
 import pytest
 from numpy import testing
-from metnum import jacobi
+from ...mEcuacionesLineales import gaussSeidel
 
 
 @pytest.mark.parametrize(
@@ -16,7 +16,7 @@ from metnum import jacobi
     ]
 )
 def test_encontro_incognitas(A, b, x0, expected):
-    resultado = jacobi(A, b, x0, 10**-12, 25)
+    resultado = gaussSeidel(A, b, x0, 10**-12, 25)
     assert not testing.assert_allclose(resultado, expected)
 
 
@@ -34,7 +34,7 @@ def test_encontro_incognitas(A, b, x0, expected):
 )
 def test_matriz_no_cuadrada(A, b, x0, expected):
     with pytest.raises(ValueError) as context:
-        jacobi(A, b, x0)
+        gaussSeidel(A, b, x0)
     assert expected in str(context.value)
 
 
@@ -52,7 +52,7 @@ def test_matriz_no_cuadrada(A, b, x0, expected):
 )
 def test_matriz_diagonal_dominantes(A, b, x0, expected):
     with pytest.raises(ValueError) as context:
-        jacobi(A, b, x0)
+        gaussSeidel(A, b, x0)
     assert expected in str(context.value)
 
 
@@ -100,5 +100,5 @@ def test_matriz_diagonal_dominantes(A, b, x0, expected):
     ])
 def test_args_types_checking(A, b, x0, tol, maxiter, expected):
     with pytest.raises(TypeError) as context:
-        jacobi(A, b, x0, tol, maxiter)
+        gaussSeidel(A, b, x0, tol, maxiter)
     assert expected in str(context.value)

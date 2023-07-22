@@ -1,9 +1,6 @@
 import pytest
-from metnum import newtonRapson
-
-
-def mensaje_error(nombre_parametro: str, tipo_esperado: str) -> str:
-    return f"El argumento {nombre_parametro} debe ser de tipo {tipo_esperado}"
+from ...mRaices import newtonRapson
+from ..helpers import mensaje_error
 
 
 def test_retorna_una_tupla():

@@ -9,7 +9,7 @@ def jacobi(
     A,
     b: list,
     x0: list,
-    tol: int or float = pow(10, -12),
+    tol: int | float = pow(10, -12),
     maxiter: int = 25,
 ):
     """

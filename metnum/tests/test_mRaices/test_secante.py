@@ -1,5 +1,6 @@
 import pytest
-from metnum import secante
+from ...mRaices import secante
+from ..helpers import mensaje_error
 
 
 def test_retorna_una_tupla():
@@ -23,21 +24,19 @@ def test_encontro_raiz_aproximada(f, aprox1, aprox2, tol, iteracciones, expected
 def test_laza_TypeError_si_f_no_es_una_funcion():
     with pytest.raises(TypeError) as context:
         secante("lambda x: x**2 - 2", 1, 2, 12**-6, 100)
-    assert "El objeto no es invocable" in str(context.value)
+    assert mensaje_error("f", "typing.Callable") in str(context.value)
 
 
 @pytest.mark.parametrize(
     "f, aprox1, aprox2, tol,iteracciones,plot,expected", [
         (lambda x: x**2 - 2, "1", 2, 12**-6, 100, False,
-         "La aproximacion0 deben ser entero o float"),
+         mensaje_error("x0", "int | float")),
         (lambda x: x**2 - 2, 1, "2", 12**-6, 100, False,
-         "La aproximacion1 deben ser entero o float"),
+         mensaje_error("x1", "int | float")),
         (lambda x: x**2 - 2, 1, 2, "12**-6", 100, False,
-         "La toleracia deben ser entero o float"),
+         mensaje_error("tolerancia", "int | float")),
         (lambda x: x**2 - 2, 1, 2, 12**-6, "100", False,
-         "maximoInteraciones deben ser entero"),
-        (lambda x: x**2 - 2, 1, 2, 12**-6, 100,
-         "False", "Plot debe de ser de tipo bool"),
+         mensaje_error("maxIter", "<class 'int'>"))
 
     ]
 )

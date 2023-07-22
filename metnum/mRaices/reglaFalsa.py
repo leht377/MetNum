@@ -1,10 +1,11 @@
-from .decoradores import args_type_checking
+from ..decorators import args_types_cheking
 from .plot import plot_reglaFalsa
+from typing import Callable
 
 
-@args_type_checking
+@args_types_cheking
 def reglaFalsa(
-    f,
+    f: Callable,
     intervaloA: int | float,
     intervaloB: int | float,
     tolerancia: int | float = 10**-6,

@@ -1,5 +1,5 @@
 import unittest
-from metnum import biseccion
+from ...mRaices import biseccion
 
 
 class test_biseccion(unittest.TestCase):

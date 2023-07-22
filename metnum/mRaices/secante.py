@@ -1,12 +1,13 @@
 from .plot import plot_secante
-from .decoradores import args_type_checking_secante
+from ..decorators import args_types_cheking
+from typing import Callable
 
 
-@args_type_checking_secante
+@args_types_cheking
 def secante(
-    f,
-    x0: int or float,
-    x1: int or float,
+    f: Callable,
+    x0: int | float,
+    x1: int | float,
     tolerancia: int | float = 10**-6,
     maxIter: int = 100,
     plot: bool = False,

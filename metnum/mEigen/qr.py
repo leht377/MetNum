@@ -1,10 +1,10 @@
 import numpy as np
-from .decoradores import qr_args_types_checking,  qr_args_transform_np_array
+from ..decorators import args_transform_from_list_to_ndarray, args_types_cheking
 
 
-@qr_args_types_checking
-@qr_args_transform_np_array
-def qr(A, tolerancia: float = 10 ** -12, maxIter: int = 100):
+@args_types_cheking
+@args_transform_from_list_to_ndarray
+def qr(A: list | np.ndarray, tolerancia: float = 10 ** -12, maxIter: int = 100) -> np.ndarray:
     """
     Calcula los autovalores de una matriz utilizando el método QR.
 

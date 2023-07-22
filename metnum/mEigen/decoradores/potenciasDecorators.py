@@ -2,7 +2,7 @@ from numpy import array
 
 
 def potencias_args_types_checking(fn):
-    def wrapper(*args):
+    def wrapper(*args, **kwargs):
         argumentos = {
             "A": args[0],
             "x": args[1],
@@ -19,19 +19,19 @@ def potencias_args_types_checking(fn):
         if not isinstance(argumentos["maxIter"], (int)):
             raise TypeError(
                 "El numero maximo de iteraciones debe de ser de tipo int")
-        return fn(*args)
+        return fn(*args, **kwargs)
 
     return wrapper
 
 
 def potencias_args_transform_np_array(fn):
-    def wrapper(*args):
+    def wrapper(*args, **kwargs):
 
         tempList = list(args)
         tempList = [array(arg, dtype=float) if isinstance(
             arg, (list)) else arg for arg in tempList]
 
         argsModified = tuple(tempList)
-        return fn(*argsModified)
+        return fn(*argsModified, **kwargs)
 
     return wrapper
