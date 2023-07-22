@@ -1,11 +1,12 @@
 from .plot import plot_newtonRapon
-from .decoradores import args_type_checking_newtonRapson
+from ..decorators import args_types_cheking
+from typing import Callable
 
 
-@args_type_checking_newtonRapson
+@args_types_cheking
 def newtonRapson(
-    f,
-    fDerivadax,
+    f: Callable,
+    fDerivadax: Callable,
     puntoInicial: int | float,
     toleracia: int | float = 10**-6,
     maximoInteraciones: int = 100,

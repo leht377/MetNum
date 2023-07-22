@@ -2,6 +2,10 @@ import pytest
 from metnum import newtonRapson
 
 
+def mensaje_error(nombre_parametro: str, tipo_esperado: str) -> str:
+    return f"El argumento {nombre_parametro} debe ser de tipo {tipo_esperado}"
+
+
 def test_retorna_una_tupla():
     resultado = newtonRapson(lambda x: x**2 + 53 * x + 5,
                              lambda x: 2*x + 53, 2, 10**-6, 100)
@@ -25,9 +29,9 @@ def test_encontro_raiz_aproximada(f, derivada, puntoInicial, tolerancia, maxIter
 @pytest.mark.parametrize(
     "f, derivada, puntoInicial, tolerancia,maxIter,plot,expected", [
         ("lambda x: x**3 - 2 * x + 2",
-         lambda x: 3 * x**2 - 2, -1, 10**-6, 40, False, "El objeto no es invocable"),
+         lambda x: 3 * x**2 - 2, -1, 10**-6, 40, False, mensaje_error("f", "typing.Callable")),
         (lambda x: x**2 + 53 * x + 5,
-         "lambda x: 2*x + 53", 2, 10**-6, 100, False, "El objeto no es invocable")
+         "lambda x: 2*x + 53", 2, 10**-6, 100, False, mensaje_error("fDerivadax", "typing.Callable"))
     ]
 )
 def test_laza_TypeError_si_f_no_es_una_funcion(f, derivada, puntoInicial, tolerancia, maxIter, plot, expected):
@@ -40,13 +44,13 @@ def test_laza_TypeError_si_f_no_es_una_funcion(f, derivada, puntoInicial, tolera
 @pytest.mark.parametrize(
     "f, derivada, puntoInicial, tolerancia,maxIter,plot,expected", [
         (lambda x: x**3 - 2 * x + 2,
-         lambda x: 3 * x**2 - 2, "-1", 10**-6, 40, False, "El pundoInicial deben ser entero o float"),
+         lambda x: 3 * x**2 - 2, "-1", 10**-6, 40, False,  mensaje_error("puntoInicial", "int | float")),
         (lambda x: x**3 - 2 * x + 2,
-         lambda x: 3 * x**2 - 2, -1, "10**-6", 40, False, "La toleracia deben ser entero o float"),
+         lambda x: 3 * x**2 - 2, -1, "10**-6", 40, False,  mensaje_error("toleracia", "int | float")),
         (lambda x: x**3 - 2 * x + 2,
-         lambda x: 3 * x**2 - 2, -1, 10**-6, "40", False, "maximoInteraciones deben ser entero"),
+         lambda x: 3 * x**2 - 2, -1, 10**-6, "40", False,  mensaje_error("maximoInteraciones", "<class 'int'>")),
         (lambda x: x**3 - 2 * x + 2,
-         lambda x: 3 * x**2 - 2, -1, 10**-6, 40, "False", "Plot debe de ser de tipo bool"),
+         lambda x: 3 * x**2 - 2, -1, 10**-6, 40, "False",  mensaje_error("plot", "<class 'bool'>")),
 
     ]
 )
