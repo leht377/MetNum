@@ -1,18 +1,18 @@
 import numpy as np
 
-from .decoradores import gaussSeidel_args_types_checking, gaussSeidel_args_transform_np_array
+from ..decorators import args_types_cheking, transform_np_array
 from .helpers import es_diagonal_dominante, es_matriz_cuadrada
 
 
-@gaussSeidel_args_types_checking
-@gaussSeidel_args_transform_np_array
+@args_types_cheking
+@transform_np_array
 def gaussSeidel(
-    A: list,
-    b: list,
-    x0: list,
+    A: list | np.ndarray,
+    b: list | np.ndarray,
+    x0: list | np.ndarray,
     tol: float = pow(10, -12),
     maxiter: int = 25,
-) -> list:
+) -> list | np.ndarray:
     """
     Esta funcion resuelve sistemas de ecuaciones liniales usando el método numerico
     de Gauss-Seidel

@@ -1,6 +1,7 @@
 import pytest
 from numpy import testing
 from ...mEcuacionesLineales import gaussSeidel
+from ..helpers import mensaje_error
 
 
 @pytest.mark.parametrize(
@@ -64,14 +65,14 @@ def test_matriz_diagonal_dominantes(A, b, x0, expected):
             [[0], [0], [0]],
             10**-12,
             25,
-            "La matriz A deben ser de tipo list"),
+            mensaje_error("A", "list | numpy.ndarray")),
         (
             [[6, 2, 1], [-1, 8, 2], [1, -1, 6]],
             "[[25], [-6], [23]]",
             [[0], [0], [0]],
             10**-12,
             25,
-            "La matriz b deben ser de tipo list"
+            mensaje_error("b", "list | numpy.ndarray")
         ),
         (
             [[6, 2, 1], [-1, 8, 2], [1, -1, 6]],
@@ -79,7 +80,7 @@ def test_matriz_diagonal_dominantes(A, b, x0, expected):
             "[[0], [0], [0]]",
             10**-12,
             25,
-            "La x0 A deben ser de tipo list"
+            mensaje_error("x0", "list | numpy.ndarray")
         ),
         (
             [[6, 2, 1], [-1, 8, 2], [1, -1, 6]],
@@ -87,7 +88,7 @@ def test_matriz_diagonal_dominantes(A, b, x0, expected):
             [[0], [0], [0]],
             "10**-12",
             25,
-            "La tolerancia debe de ser de tipo entero o float"
+            mensaje_error("tol", "<class 'float'>")
         ),
         (
             [[6, 2, 1], [-1, 8, 2], [1, -1, 6]],
@@ -95,7 +96,7 @@ def test_matriz_diagonal_dominantes(A, b, x0, expected):
             [[0], [0], [0]],
             10**-12,
             "25",
-            "El numero maximo de iteraciones debe de ser de tipo entero"
+            mensaje_error("maxiter", "<class 'int'>")
         )
     ])
 def test_args_types_checking(A, b, x0, tol, maxiter, expected):
