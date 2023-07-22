@@ -1,2 +1,3 @@
 from .args_transform_from_list_to_ndarray import args_transform_from_list_to_ndarray
 from .args_types_cheking import args_types_cheking
+from .transform_np_array import transform_np_array

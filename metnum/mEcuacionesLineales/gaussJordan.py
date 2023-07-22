@@ -1,11 +1,12 @@
 import numpy as np
 from .helpers import es_matriz_cuadrada
-from .decoradores import gaussJordan_args_transform_np_array, gaussJordan_args_types_checking
+from ..decorators import args_types_cheking, transform_np_array
+from numpy import ndarray
 
 
-@gaussJordan_args_types_checking
-@gaussJordan_args_transform_np_array
-def gaussJordan(A: list, b: list):
+@args_types_cheking
+@transform_np_array
+def gaussJordan(A: list | ndarray, b: list | ndarray) -> ndarray:
     """
     Esta funcion resuelve sistemas de ecuaciones lineales Ax=b usando el método de Gauss-Jordan
 

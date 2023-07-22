@@ -1,5 +1,6 @@
 import pytest
 from ...mEcuacionesLineales import gaussJordan
+from ..helpers import mensaje_error
 import numpy as np
 
 
@@ -39,12 +40,12 @@ def test_matriz_no_cuadrada(A, b, expected):
         (
             "[[6, 2, 1], [-1, 8, 2], [1, -1, 6]]",
             [[25], [-6], [23]],
-            "La matriz A deben ser de tipo list"
+            mensaje_error("A", "list | numpy.ndarray")
         ),
         (
             [[3, -0.1, -0.2], [0.1, 7, -0.3], [0.3, -0.2, 10]],
             " [[7.85], [-19.3], [71.4]]",
-            "La matriz b deben ser de tipo list"
+            mensaje_error("b", "list | numpy.ndarray")
         )
     ]
 )
