@@ -4,7 +4,7 @@ from ..decorators import args_types_cheking, args_transform_from_list_to_ndarray
 
 @args_types_cheking
 @args_transform_from_list_to_ndarray
-def potencias(A: list | np.ndarray, x: list | np.ndarray, tolerancia: float = 10 ** -12, maxIter: int = 100):
+def potencias(A: list | np.ndarray, x: list | np.ndarray, tolerancia: float = 10 ** -12, maxIter: int = 100) -> tuple:
     """
     Calcula el autovalor dominante y el autovector asociado utilizando el método de las potencias.
 
@@ -30,9 +30,8 @@ def potencias(A: list | np.ndarray, x: list | np.ndarray, tolerancia: float = 10
         El autovector asociado al autovalor dominante.
 
     Ejemplos:
-    >>> A = np.array([[1, 2], [3, 4]])
-    >>> x = np.array([1, 1])
-    >>> potencias(A, x, 1e-6, 100)
+
+    >>> potencias([[1, 2], [3, 4]], [1, 1], 1e-6, 100)
     (5.372281323269014, array([0.41597356, 0.90937671]))
     """
 
@@ -48,4 +47,4 @@ def potencias(A: list | np.ndarray, x: list | np.ndarray, tolerancia: float = 10
         error = abs(lambda_ - lambdaviejo) / lambda_
         lambdaviejo = lambda_
         k = k + 1
-    return lambda_, x
+    return (lambda_, x)

@@ -1,2 +1,0 @@
-from .qrDecorators import qr_args_transform_np_array, qr_args_types_checking
-from .potenciasDecorators import potencias_args_transform_np_array, potencias_args_types_checking
