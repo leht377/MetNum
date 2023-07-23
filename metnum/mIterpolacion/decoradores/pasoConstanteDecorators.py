@@ -2,22 +2,6 @@ from functools import wraps
 from numpy import ndarray
 
 
-def pasoConstante_args_types_checking(fn):
-    @wraps(fn)
-    def wrapper(x, y, xk):
-
-        if not isinstance(x, (list, ndarray)):
-            raise TypeError("La variable x deben ser de tipo list o ndarray")
-        if not isinstance(y, (list, ndarray)):
-            raise TypeError("La variable y debe de ser de tipo list o ndarray")
-        if not isinstance(xk, (float, int)):
-            raise TypeError("La variable xk debe de ser de tipo float o int")
-
-        return fn(x, y, xk)
-
-    return wrapper
-
-
 def verificar_rango_inversion(fn):
     @wraps(fn)
     def wrapper(x, y, xk):

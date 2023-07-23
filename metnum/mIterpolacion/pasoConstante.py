@@ -1,13 +1,14 @@
 
 from math import factorial
 from .helpers import x0_index_finder, calculardeltas
-from .decoradores import pasoConstante_args_types_checking, verificar_rango_inversion
+from .decoradores import verificar_rango_inversion
+from ..decorators import args_types_cheking
 from numpy import ndarray
 
 
-@pasoConstante_args_types_checking
+@args_types_cheking
 @verificar_rango_inversion
-def pasoConstante(x: list or ndarray, y: list or ndarray, xk: float or int) -> tuple:
+def pasoConstante(x: list | ndarray, y: list | ndarray, xk: float | int) -> tuple:
     """
     Realiza una interpolación con paso constante para encontrar el valor correspondiente de yk dado un valor xk.
 
