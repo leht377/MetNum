@@ -1,5 +1,12 @@
 # TODO hacer decoradores de esta funcion
-def pasoVariable(x: list, y: list, xk: int or float) -> float:
+from numpy import ndarray
+
+from ..decorators import args_types_cheking, args_transform_from_list_to_ndarray
+
+
+@args_types_cheking
+@args_transform_from_list_to_ndarray
+def pasoVariable(x: list | ndarray, y: list | ndarray, xk: int | float) -> float:
     """
     Esta función encuentra el valor en y a un xk x dado como parametro
     usando el método de Lagrange con paso variable 
