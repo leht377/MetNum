@@ -94,9 +94,40 @@ ln.jacobi(A, b, tolerancia, maxIter)
 ln.LU(A, b)
 ```
 
+### Métodos de interpolación
+
+La librería contiene varios métodos de iterpolacion, los cuales son:
+
+- Método de interpolación inversa
+- Método de interpolación de paso constate
+- Método de interpolación de paso variable
+
+```python
+import metnum.mInterpolacion as ipl
+
+```
+
 ### Métodos de valores propios y vectores propios
 
-### Métodos de interpolación
+La librería cuenta con los siguientes para encontrar valores propios y vectores propios de una matriz
+
+- Método de descomposición QR
+- Método de las potencias
+
+```python
+import metnum.mEigen as eg
+matrizA = [[3, 2, 4],[2, 2, 0],[0, 2, 3]]
+
+#returns array([5.69254381 0.48690755 1.82054864])
+eg.qr(matrizA)
+
+
+matrizB = [[1, 2], [3, 4]]
+vectorInicial = [1, 1]
+
+# returns (5.372281323269014, array([0.41597356, 0.90937671]))
+eg.potencias(matrizB,vectorInicial)
+```
 
 <!-- Librería de Métodos Numéricos en Python
 Esta es una librería de Python que contiene implementaciones de diversos métodos numéricos utilizados en la resolución de problemas matemáticos y científicos. Los métodos implementados incluyen métodos de integración numérica, métodos de diferenciación numérica, métodos de solución de ecuaciones diferenciales ordinarias, métodos de solución de ecuaciones no lineales, entre otros.

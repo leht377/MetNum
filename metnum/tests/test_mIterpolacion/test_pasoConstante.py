@@ -1,5 +1,5 @@
 import pytest
-from ...mIterpolacion import pasoConstante
+from ...mInterpolacion import pasoConstante
 from ..helpers import mensaje_error
 
 

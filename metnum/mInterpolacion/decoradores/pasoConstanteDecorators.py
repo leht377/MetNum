@@ -1,5 +1,4 @@
 from functools import wraps
-from numpy import ndarray
 
 
 def verificar_rango_inversion(fn):
