@@ -54,7 +54,7 @@ r.newtonRapson(lambda x: x**3 - 2 * x + 2,lambda x: 3 * x**2 - 2, -1, 10**-6, 40
 r.secante(lambda x: x**3 - x**2, 4, 8, 10**-6, 50)
 ```
 
-##### Componente grafico
+##### Componente gráfico
 
 <div style="display:flex">
   <img src="https://github.com/leht377/pagina_web/blob/master/Biseccion.png?raw=true" alt="Screenshot of biseccion" width="300px">
@@ -103,8 +103,29 @@ La librería contiene varios métodos de iterpolacion, los cuales son:
 - Método de interpolación de paso variable
 
 ```python
-import metnum.mInterpolacion as ipl
+import metnum.mInterpolacion as interp
 
+x = [2, 4, 6, 8, 10]
+y = [8, 26, 52, 86, 128]
+xk = 3
+
+#returns (16.0,[18, 8])
+interp.pasoConstante(x,y,xk)
+
+
+x = [0, 1, 2, 5]
+y = [5, 7, 9, 15]
+xk = 3
+
+#return 11.0
+interp.pasoVariable(x,y,xk)
+
+x = [0.2, 0.4, 0.6]
+y = [-1.472, -0.656, 0.496]
+yk = 0
+
+#returns 0.5257080610021786
+interp.inversa(x,y,yk)
 ```
 
 ### Métodos de valores propios y vectores propios
