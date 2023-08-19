@@ -2,6 +2,7 @@
 from .plot import plot_biseccion_manual, plot_biseccion
 from ..decorators import args_types_cheking
 from typing import Callable
+from ..helpers import tabulate_output
 
 
 @args_types_cheking
@@ -11,6 +12,7 @@ def biseccion(
     intervaloB: int | float,
     tolerancia: float | int = 10**-6,
     plot: bool = False,
+    tabulate: bool = False
 ) -> tuple:
     """
     Esta funcion entrega el valor aproximado de una raíz que esta en la función continua f(x)
@@ -65,10 +67,13 @@ def biseccion(
     f_de_aproxNueva = f(aproxNueva)
     f_de_intervaloA = f(intervaloA)
     f_de_intervaloB = f(intervaloB)
-    if plot:
-        historial_A = [intervaloA]
-        historial_B = [intervaloB]
-        historial_Raiz = [aproxNueva]
+
+    historial = {
+        "A": [intervaloA],
+        "b": [intervaloB],
+        "Raiz": [aproxNueva],
+        "Error": [None]
+    }
 
     while errorRelativo > tolerancia:
         iteraciones += 1
@@ -90,14 +95,16 @@ def biseccion(
         f_de_aproxNueva = f(aproxNueva)
         errorRelativo = abs((aproxNueva - aproxAnterior) / aproxNueva)
 
-        if plot:
-            historial_A.append(intervaloA)
-            historial_B.append(intervaloB)
-            historial_Raiz.append(aproxNueva)
+        if plot | tabulate:
+            historial["A"].append(intervaloA)
+            historial["b"].append(intervaloB)
+            historial["Raiz"].append(aproxNueva)
+            historial["Error"].append(errorRelativo)
 
-    plot and plot_biseccion_manual.grafica(
-        f, historial_A, historial_B, historial_Raiz
-    ).pintarGrafica()
-    # plot_biseccion.paint_plot(f, historial_A, historial_B, historial_Raiz)
+    if plot:
+        plot_biseccion_manual.grafica(
+            f, historial["A"],  historial["b"], historial["Raiz"]).pintarGrafica()
+    if tabulate:
+        tabulate_output(historial)
 
     return aproxNueva, errorRelativo, iteraciones

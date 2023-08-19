@@ -39,11 +39,11 @@ import metnum.mRaices as r
 
 # (aproxRaiz, errorRelativo, Iteraciones)
 # returns (-2.195822238922119, 6.514696177371724e-07, 19)
-r.biseccion(lambda x: -1 * x**3 + 3 * x - 4, -3, -1.5, 10**-6, True),
+r.biseccion(lambda x: -1 * x**3 + 3 * x - 4, -3, -1.5, 10**-6),
 
 # (aproxRaiz, errorRelativo, Iteraciones)
 # returns (-2.195823344883275, 2.161972486337072e-07, 10)
-r.reglaFalsa(lambda x: -1 * x**3 + 3 * x - 4, -3, -1.5, 10**-6, True),
+r.reglaFalsa(lambda x: -1 * x**3 + 3 * x - 4, -3, -1.5, 10**-6),
 
 # (aproxRaiz, errorRelativo, Iteraciones)
 # returns (1.0, 1.0, 41)
