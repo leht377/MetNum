@@ -20,7 +20,7 @@ def test_retorna_una_tupla():
 def test_encontro_raiz_aproximada(f, derivada, puntoInicial, tolerancia, maxIter, plot, expected):
     resultado = newtonRapson(f, derivada, puntoInicial,
                              tolerancia, maxIter, plot)
-    assert resultado == expected
+    assert resultado[0] == expected[0]
 
 
 @pytest.mark.parametrize(

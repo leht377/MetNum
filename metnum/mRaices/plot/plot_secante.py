@@ -4,15 +4,15 @@ from matplotlib.widgets import Button
 
 
 class grafica:
-    def __init__(self, f, historialX, historialXmenos) -> None:
+    def __init__(self, f, xi, x0) -> None:
 
         self.titulo = "Secante"
         self.frameAnimation = 0
-        self.maximosFrames = len(historialX) - 1
+        self.maximosFrames = len(xi) - 1
 
         self.f = f
-        self.historialX = np.array(historialX)
-        self.historialXmenos = np.array(historialXmenos)
+        self.xi = np.array(xi)
+        self.x0 = np.array(x0)
 
         self.fig, self.ax = plt.subplots()
 
@@ -25,38 +25,39 @@ class grafica:
     def _update(self, frame):
         if frame < self.maximosFrames:
 
-            self.xn.set_xdata([self.historialX[frame], self.historialX[frame]])
-            self.xn.set_ydata([0, self.f(self.historialX[frame])])
+            self.xn.set_xdata([self.xi[frame], self.xi[frame]])
+            self.xn.set_ydata([0, self.f(self.xi[frame])])
 
             self.xmenos.set_xdata(
-                [self.historialXmenos[frame], self.historialXmenos[frame]]
+                [self.x0[frame], self.x0[frame]]
             )
-            self.xmenos.set_ydata([0, self.f(self.historialXmenos[frame])])
+            self.xmenos.set_ydata([0, self.f(self.x0[frame])])
 
-            self.raiz.set_xdata([self.historialX[frame + 1]])
+            self.raiz.set_xdata([self.xi[frame + 1]])
             self.raiz.set_ydata([0])
 
             self.secante.set_xdata(
                 [
-                    self.historialX[frame],
-                    self.historialXmenos[frame],
-                    self.historialX[frame + 1],
+                    self.xi[frame],
+                    self.x0[frame],
+                    self.xi[frame + 1],
                 ]
             )
             self.secante.set_ydata(
-                [self.f(self.historialX[frame]), self.f(self.historialXmenos[frame]), 0]
+                [self.f(self.xi[frame]), self.f(self.x0[frame]), 0]
             )
 
             self.ax.legend(
                 [
                     "f(x)",
-                    f"Xn {self.historialX[frame]}",
-                    f"Xmenos {self.historialXmenos[frame]}",
-                    f"Raiz {self.historialX[frame+1]}",
+                    f"Xi {self.xi[frame]}",
+                    f"Xi-1 {self.x0[frame]}",
+                    f"Raiz {self.xi[frame+1]}",
                     f"Secante",
                 ]
             )
-            self.ax.set_title(f"{self.titulo}\n Paso {frame+1}/{self.maximosFrames}")
+            self.ax.set_title(
+                f"{self.titulo}\n Paso {frame+1}/{self.maximosFrames}")
             plt.draw()
 
     def _next(self, event):
@@ -75,29 +76,30 @@ class grafica:
         plt.subplots_adjust(bottom=0.2)
         self.ax.set_title(f"{self.titulo}\n Paso 1/{self.maximosFrames}")
 
-        minEjeX = self.historialXmenos.min()
-        maxEjex = self.historialXmenos.max()
+        minEjeX = self.x0.min()
+        maxEjex = self.x0.max()
 
         diferenciaEjeX = abs(minEjeX - maxEjex)
         espaciamiento = diferenciaEjeX * procentajeEspacio
 
-        x = np.arange((minEjeX - espaciamiento), (maxEjex + espaciamiento), 0.1)
+        x = np.arange((minEjeX - espaciamiento),
+                      (maxEjex + espaciamiento), 0.1)
         y = [self.f(x) for x in x]
 
-        x_xmenos = [self.historialXmenos[0], self.historialXmenos[0]]
-        y_xmenos = [0, self.f(self.historialXmenos[0])]
+        x_xmenos = [self.x0[0], self.x0[0]]
+        y_xmenos = [0, self.f(self.x0[0])]
 
-        x_xn = [self.historialX[0], self.historialX[0]]
-        y_xn = [0, self.f(self.historialX[0])]
+        x_xn = [self.xi[0], self.xi[0]]
+        y_xn = [0, self.f(self.xi[0])]
 
-        x_raiz = np.array([self.historialX[1]])
+        x_raiz = np.array([self.xi[1]])
         y_raiz = np.array([0])
 
         x_secante = np.array(
-            [self.historialX[0], self.historialXmenos[0], self.historialX[1]]
+            [self.xi[0], self.x0[0], self.xi[1]]
         )
         y_secante = np.array(
-            [self.f(self.historialX[0]), self.f(self.historialXmenos[0]), 0]
+            [self.f(self.xi[0]), self.f(self.x0[0]), 0]
         )
 
         (self.funcion, self.xn, self.xmenos, self.raiz, self.secante) = self.ax.plot(
@@ -110,9 +112,9 @@ class grafica:
         self.ax.legend(
             [
                 "f(x)",
-                f"Xn {self.historialX[0]}",
-                f"Xmenos {self.historialXmenos[0]}",
-                f"Raiz {self.historialX[1]}",
+                f"Xi {self.xi[0]}",
+                f"Xi-1 {self.x0[0]}",
+                f"Raiz {self.xi[1]}",
                 f"Secante",
             ]
         )

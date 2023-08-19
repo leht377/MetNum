@@ -1,4 +1,5 @@
 from ..decorators import args_types_cheking
+from ..helpers import tabulate_output
 from .plot import plot_reglaFalsa
 from typing import Callable
 
@@ -10,6 +11,7 @@ def reglaFalsa(
     intervaloB: int | float,
     tolerancia: int | float = 10**-6,
     plot: bool = False,
+    tabulate: bool = False
 ) -> tuple:
     """
     En esta funcion podemos encontrar el valor de la raiz en una funcion F(x)
@@ -20,16 +22,19 @@ def reglaFalsa(
     funcion f(x)
 
     intervaloA: int or float
-        primer intervalo a evaluar
+        Extremo izquierdo del intervalo a evaluar
 
     intervaloB: int or float
-       Segundo intervalo a evaluar
+        Extremo derecho del intervalo a evaluar
 
     tolerancia: int or float
        Tolerancia maxima con la cual se acepta la aproximación de la raíz
 
     (Opcional)  plot: bool
        Ver graficamente el metodo de biseccion
+
+    (Opcional)  tabulate: bool
+       Ver de forma tabulada todas las iteraciones
 
     retorna
     ----------
@@ -63,10 +68,12 @@ def reglaFalsa(
     f_de_aproxNueva = f(aproxNueva)
     errorRelativo = 1000
 
-    if plot:
-        historial_A = [intervaloA]
-        historial_B = [intervaloB]
-        historial_Raiz = [aproxNueva]
+    historial = {
+        "A": [intervaloA],
+        "b": [intervaloB],
+        "Raiz": [aproxNueva],
+        "Error": [None],
+    }
 
     while errorRelativo >= tolerancia:
         iteraciones += 1
@@ -74,11 +81,11 @@ def reglaFalsa(
         if f_de_intervaloA * f_de_aproxNueva == 0:
             break
 
-        if f_de_aproxNueva < 0:
+        if f_de_intervaloB * f_de_aproxNueva < 0:
             intervaloA = aproxNueva
             f_de_intervaloA = f_de_aproxNueva
 
-        elif f_de_aproxNueva > 0:
+        elif f_de_intervaloB * f_de_aproxNueva > 0:
             intervaloB = aproxNueva
             f_de_intervaloB = f_de_aproxNueva
 
@@ -90,16 +97,18 @@ def reglaFalsa(
         )
 
         f_de_aproxNueva = f(aproxNueva)
-        errorRelativo = abs((aproxNueva - aproxAnterior) / aproxNueva * 100)
+        errorRelativo = abs((aproxNueva - aproxAnterior) / aproxNueva)
 
-        if plot:
-            historial_A.append(intervaloA)
-            historial_B.append(intervaloB)
-            historial_Raiz.append(aproxNueva)
+        if plot | tabulate:
+            historial["A"].append(intervaloA)
+            historial["b"].append(intervaloB)
+            historial["Raiz"].append(aproxNueva)
+            historial["Error"].append(errorRelativo)
 
     if plot:
         plot_reglaFalsa.grafica(
-            f, historial_A, historial_B, historial_Raiz
-        ).pintarGrafica()
+            f,  historial["A"],  historial["b"],  historial["Raiz"]).pintarGrafica()
+    if tabulate:
+        tabulate_output(historial)
 
     return aproxNueva, errorRelativo, iteraciones

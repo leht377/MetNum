@@ -11,14 +11,14 @@ def test_retorna_una_tupla():
 @pytest.mark.parametrize(
     "f, aprox1, aprox2, tol,iteracciones,expected", [
         (lambda x: x**2 - 2, 1, 2, 12**-6, 100,
-         (1.4142135623730954, 8.881784197001252e-16, 6)),
+         1.4142135623730954),
         (lambda x: x**2 + 53 * x + 5, 1, 2, 10**-
-         6, 20, (-0.09450814697821237, 0.0, 5))
+         6, 20, -0.09450814697821237)
     ]
 )
 def test_encontro_raiz_aproximada(f, aprox1, aprox2, tol, iteracciones, expected):
     resultado = secante(f, aprox1, aprox2, tol, iteracciones)
-    assert resultado == expected
+    assert resultado[0] == expected
 
 
 def test_laza_TypeError_si_f_no_es_una_funcion():

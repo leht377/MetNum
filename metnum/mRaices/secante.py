@@ -1,5 +1,6 @@
 from .plot import plot_secante
 from ..decorators import args_types_cheking
+from ..helpers import tabulate_output
 from typing import Callable
 
 
@@ -11,6 +12,7 @@ def secante(
     tolerancia: int | float = 10**-6,
     maxIter: int = 100,
     plot: bool = False,
+    tabulate: bool = False,
 ) -> tuple:
     """
     Encuentra una aproximación de la raíz de la función f utilizando el método de la secante.
@@ -29,6 +31,8 @@ def secante(
         Número de interaciones máximas permitidas.
     (Opcional)  plot: bool
        Ver graficamente el metodo de la secante.
+    (Opcional)  tabulate: bool
+       Ver de forma tabulada todas las iteraciones
 
     Retorna
     --------
@@ -47,35 +51,48 @@ def secante(
     """
 
     iteraciones = 1
-    dfsuc = x1 - x0  # Diferencia sucesiva entre las dos aproximaciones
+
     aproxAnterior = x0
     aproxActual = x1
 
     f_aproxAnterior = f(aproxAnterior)
     f_aproxActual = f(aproxActual)
+    error = abs(x1 - x0)
 
-    if plot:
-        h_aproxAnterior = [aproxAnterior]
-        h_aproxActual = [aproxActual]
+    historial = {
+        "xi+1": [],
+        "xi": [],
+        "xi-1": [],
+        "Error": []
+    }
 
-    while abs(dfsuc) >= tolerancia and iteraciones <= maxIter:
+    while error >= tolerancia:
         iteraciones = iteraciones + 1
-        dfsuc = (  # Diferencia sucesiva entre las dos aproximaciones
+        nuevaAproximacion = aproxActual - (
             f_aproxActual
             * (aproxActual - aproxAnterior)
             / (f_aproxActual - f_aproxAnterior)
         )
+        error = abs(nuevaAproximacion-aproxActual)
+
+        if plot | tabulate:
+            historial["xi-1"].append(aproxAnterior)
+            historial["xi"].append(aproxActual)
+            historial["xi+1"].append(nuevaAproximacion)
+            historial["Error"].append(error)
+        if iteraciones == maxIter:
+            raise ValueError(
+                "El método de la secante no convergió después de alcanzar el número máximo de iteraciones.")
 
         aproxAnterior = aproxActual
         f_aproxAnterior = f_aproxActual
-        aproxActual = aproxActual - dfsuc  # Nueva aproximacion
+        aproxActual = nuevaAproximacion  # Nueva aproximacion
         f_aproxActual = f(aproxActual)
 
-        if plot:
-            h_aproxAnterior.append(aproxAnterior)
-            h_aproxActual.append(aproxActual)
+    if plot:
+        plot_secante.grafica(
+            f, historial["xi"], historial["xi-1"]).pintarGrafica()
+    if tabulate:
+        tabulate_output(historial)
 
-    plot and plot_secante.grafica(
-        f, h_aproxActual, h_aproxAnterior).pintarGrafica()
-
-    return aproxActual, abs(f_aproxActual), iteraciones - 1
+    return aproxActual, error, iteraciones - 1
