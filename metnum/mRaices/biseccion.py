@@ -31,6 +31,8 @@ def biseccion(
         Tolerancia maxima con la cual se acepta la aproximación de la raíz
     (Opcional)  plot: bool
        Ver graficamente el metodo de biseccion
+    (Opcional)  tabulate: bool
+       Ver de forma tabulada todas las iteraciones
 
     Retorna
     -----------
