@@ -1,4 +1,4 @@
-from .plot import plot_secante
+from .plot import graphSecante
 from ..decorators import args_types_cheking
 from ..helpers import tabulate_output
 from typing import Callable
@@ -90,8 +90,7 @@ def secante(
         f_aproxActual = f(aproxActual)
 
     if plot:
-        plot_secante.grafica(
-            f, historial["xi"], historial["xi-1"]).pintarGrafica()
+        graphSecante.graph(f, historial["xi"], historial["xi-1"]).paint()
     if tabulate:
         tabulate_output(historial)
 

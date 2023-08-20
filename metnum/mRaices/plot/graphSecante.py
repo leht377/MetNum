@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.widgets import Button
+from .frame import frame
 
 
-class grafica:
+class graph(frame):
     def __init__(self, f, xi, x0) -> None:
+        super().__init__()
 
         self.titulo = "Secante"
         self.frameAnimation = 0
@@ -14,7 +15,7 @@ class grafica:
         self.xi = np.array(xi)
         self.x0 = np.array(x0)
 
-        self.fig, self.ax = plt.subplots()
+        # self.fig, self.ax = plt.subplots()
 
         self.funcion = None
         self.xn = None
@@ -60,20 +61,9 @@ class grafica:
                 f"{self.titulo}\n Paso {frame+1}/{self.maximosFrames}")
             plt.draw()
 
-    def _next(self, event):
-        if self.frameAnimation < self.maximosFrames:
-            self.frameAnimation += 1
-            self._update(self.frameAnimation)
-
-    def _prev(self, event):
-        if self.frameAnimation > 0:
-            self.frameAnimation -= 1
-            self._update(self.frameAnimation)
-
-    def _valores_iniciales(self):
+    def _configure_initial_graph(self):
         procentajeEspacio = 0.15
 
-        plt.subplots_adjust(bottom=0.2)
         self.ax.set_title(f"{self.titulo}\n Paso 1/{self.maximosFrames}")
 
         minEjeX = self.x0.min()
@@ -118,21 +108,3 @@ class grafica:
                 f"Secante",
             ]
         )
-
-    def pintarGrafica(self):
-        self._valores_iniciales()
-
-        plt.axhline(0, color="black")  # ejeX plano cartesiano
-        plt.axvline(0, color="black")  # ejeY plano cartesiano
-
-        axprev = plt.axes([0.7, 0.05, 0.1, 0.075])
-        axnext = plt.axes([0.81, 0.05, 0.1, 0.075])
-
-        btnnext = Button(axnext, "Siguiente")
-        btnprev = Button(axprev, "Atras")
-
-        btnnext.on_clicked(self._next)
-        btnprev.on_clicked(self._prev)
-
-        self.ax.grid()
-        plt.show()
