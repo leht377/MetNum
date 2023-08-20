@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+
 import numpy as np
 from .frame import frame
 
@@ -16,12 +16,6 @@ class graph(frame):
         self.x0 = np.array(x0)
 
         # self.fig, self.ax = plt.subplots()
-
-        self.funcion = None
-        self.xn = None
-        self.xmenos = None
-        self.raiz = None
-        self.secante = None
 
     def _update(self, frame):
         if frame < self.maximosFrames:
@@ -59,7 +53,7 @@ class graph(frame):
             )
             self.ax.set_title(
                 f"{self.titulo}\n Paso {frame+1}/{self.maximosFrames}")
-            plt.draw()
+            self.draw()
 
     def _configure_initial_graph(self):
         procentajeEspacio = 0.15

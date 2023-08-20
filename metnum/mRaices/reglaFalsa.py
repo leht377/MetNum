@@ -1,6 +1,6 @@
 from ..decorators import args_types_cheking
 from ..helpers import tabulate_output
-from .plot import plot_reglaFalsa
+from .plot import graphReglaFalsa
 from typing import Callable
 
 
@@ -106,8 +106,8 @@ def reglaFalsa(
             historial["Error"].append(errorRelativo)
 
     if plot:
-        plot_reglaFalsa.grafica(
-            f,  historial["A"],  historial["b"],  historial["Raiz"]).pintarGrafica()
+        graphReglaFalsa.graph(
+            f,  historial["A"],  historial["b"],  historial["Raiz"]).paint()
     if tabulate:
         tabulate_output(historial)
 

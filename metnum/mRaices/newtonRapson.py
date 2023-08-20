@@ -1,4 +1,4 @@
-from .plot import plot_newtonRapon
+from .plot import graphNewtonRapson
 from ..decorators import args_types_cheking
 from ..helpers import tabulate_output
 from typing import Callable
@@ -79,7 +79,8 @@ def newtonRapson(
                 "El método de la secante no convergió después de alcanzar el número máximo de iteraciones.")
 
     if plot:
-        plot_newtonRapon.grafica(f, historial["xi"]).pintarGrafica()
+        graphNewtonRapson.graph(f, historial["xi"]).paint()
+        # plot_newtonRapon.grafica(f, historial["xi"]).pintarGrafica()
     if tabulate:
         tabulate_output(historial)
 

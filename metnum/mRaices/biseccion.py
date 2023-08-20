@@ -1,7 +1,8 @@
 
-from .plot import plot_biseccion_manual, plot_biseccion
-from ..decorators import args_types_cheking
 from typing import Callable
+
+from .plot import graphBiseccion
+from ..decorators import args_types_cheking
 from ..helpers import tabulate_output
 
 
@@ -104,8 +105,8 @@ def biseccion(
             historial["Error"].append(errorRelativo)
 
     if plot:
-        plot_biseccion_manual.grafica(
-            f, historial["A"],  historial["b"], historial["Raiz"]).pintarGrafica()
+        graphBiseccion.graph(
+            f, historial["A"],  historial["b"], historial["Raiz"]).paint()
     if tabulate:
         tabulate_output(historial)
 

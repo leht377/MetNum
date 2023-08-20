@@ -10,6 +10,7 @@ class frame(ABC):
         self.frameAnimation = 0
         self.maximosFrames = 0
         self.fig.subplots_adjust(bottom=0.2)
+        self.draw = plt.draw
 
     @abstractmethod
     def _update(self, frame):
