@@ -25,9 +25,9 @@ def biseccion(
     f : function
         funcion f(x)
     intervaloA : float or int
-        Primer extremo del intervalo donde se encuentra la raíz [intervaloA , ... ]
+        Extremo inferior del intervalo [intervaloA , ... ]
     intervaloB : float or int
-        Segundo extremo del intervalo donde se encuentra la raíz [..., intervaloB]
+        Extremo superior del intervalo [..., intervaloB]
     tolerancia : float or int
         Tolerancia maxima con la cual se acepta la aproximación de la raíz
     (Opcional)  plot: bool
@@ -84,14 +84,14 @@ def biseccion(
             errorRelativo = 0
             break
         # La raíz  esta en [aproxNueva, intervaloB]
-        if f_de_intervaloB * f_de_aproxNueva < 0:
-            intervaloA = aproxNueva
-            f_de_intervaloA = f_de_aproxNueva
-
-        # La raíz  esta en [intervaloA, aproxNueva]
-        elif f_de_intervaloB * f_de_aproxNueva > 0:
+        if f_de_intervaloA * f_de_aproxNueva < 0:
             intervaloB = aproxNueva
             f_de_intervaloB = f_de_aproxNueva
+
+        # La raíz  esta en [intervaloA, aproxNueva]
+        elif f_de_intervaloA * f_de_aproxNueva > 0:
+            intervaloA = aproxNueva
+            f_de_intervaloA = f_de_aproxNueva
 
         aproxAnterior = aproxNueva
         aproxNueva = (intervaloA + intervaloB) / 2
