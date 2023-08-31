@@ -39,8 +39,8 @@ class frame(ABC):
         axprev = plt.axes([0.7, 0.05, 0.1, 0.075])  # type: ignore
         axnext = plt.axes([0.81, 0.05, 0.1, 0.075])  # type: ignore
 
-        btnnext = Button(axnext, "Siguiente")
-        btnprev = Button(axprev, "Atras")
+        btnnext = Button(axnext, "Next")
+        btnprev = Button(axprev, "Back")
 
         btnnext.on_clicked(self._next)
         btnprev.on_clicked(self._prev)

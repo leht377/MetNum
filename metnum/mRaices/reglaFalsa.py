@@ -54,15 +54,19 @@ def reglaFalsa(
     >>> reglaFalsa (lambda x: math.exp(3 * x) - 4, 0, 1, 10**-6)
     (0.46209811446609667, 8.567878429991425e-07, 35)
     """
+    if f(intervaloA) * f(intervaloB) > 0:
+        raise ValueError(
+            f"No hay raiz en el intervalo [{intervaloA}, {intervaloB}]")
+
     iteraciones = 0
 
     f_de_intervaloA = f(intervaloA)
     f_de_intervaloB = f(intervaloB)
 
-    aproxNueva = intervaloA + (
-        f_de_intervaloA
-        * (intervaloA - intervaloB)
-        / (f_de_intervaloB - f_de_intervaloA)
+    aproxNueva = intervaloB - (
+        (f_de_intervaloB
+            * (intervaloA - intervaloB))
+        / (f_de_intervaloA - f_de_intervaloB)
     )
 
     f_de_aproxNueva = f(aproxNueva)
@@ -78,22 +82,24 @@ def reglaFalsa(
     while errorRelativo >= tolerancia:
         iteraciones += 1
 
-        if f_de_intervaloA * f_de_aproxNueva == 0:
+        if f_de_intervaloA * f_de_aproxNueva == 0:  # Se encontro la raíz exacta
+            errorRelativo = 0
             break
-
-        if f_de_intervaloB * f_de_aproxNueva < 0:
-            intervaloA = aproxNueva
-            f_de_intervaloA = f_de_aproxNueva
-
-        elif f_de_intervaloB * f_de_aproxNueva > 0:
+        # La raíz  esta en [aproxNueva, intervaloB]
+        if f_de_intervaloA * f_de_aproxNueva < 0:
             intervaloB = aproxNueva
             f_de_intervaloB = f_de_aproxNueva
 
+        # La raíz  esta en [intervaloA, aproxNueva]
+        elif f_de_intervaloA * f_de_aproxNueva > 0:
+            intervaloA = aproxNueva
+            f_de_intervaloA = f_de_aproxNueva
+
         aproxAnterior = aproxNueva
-        aproxNueva = intervaloA + (
-            f_de_intervaloA
-            * (intervaloA - intervaloB)
-            / (f_de_intervaloB - f_de_intervaloA)
+        aproxNueva = intervaloB - (
+            (f_de_intervaloB
+             * (intervaloA - intervaloB))
+            / (f_de_intervaloA - f_de_intervaloB)
         )
 
         f_de_aproxNueva = f(aproxNueva)
