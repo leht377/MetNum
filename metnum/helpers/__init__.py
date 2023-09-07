@@ -1,1 +1,1 @@
-from .tabulatemethod import tabulate_output
+from .tabulate_output import tabulate_output
