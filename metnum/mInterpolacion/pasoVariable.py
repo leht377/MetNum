@@ -1,4 +1,4 @@
-# TODO hacer decoradores de esta funcion
+
 from numpy import ndarray
 
 from ..decorators import args_types_cheking, args_transform_from_list_to_ndarray

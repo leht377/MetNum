@@ -1,6 +1,7 @@
 import numpy as np
 from .helpers import es_diagonal_dominante, es_matriz_cuadrada
 from ..decorators import transform_np_array, args_types_cheking
+from ..helpers import tabulate_output
 
 
 @args_types_cheking
@@ -9,8 +10,9 @@ def jacobi(
     A: list | np.ndarray,
     b:  list | np.ndarray,
     x0:  list | np.ndarray,
-    tol:  float = pow(10, -12),
+    tol:  float = 10 ** -12,
     maxiter: int = 25,
+    tabulate: bool = False
 ):
     """
     Esta funcion resuelve sistemas de ecuaciones lineales Ax=b usando el método de jacobi
@@ -32,7 +34,7 @@ def jacobi(
     Retorna
     ------------
     vectorSolucion: list 
-        Vector con la solucion aproximada al sistema de ecuaciones 
+       El vector x que satisface el sistema de ecuaciones lineales Ax = b
 
     Ejemplos
     ----------
@@ -72,17 +74,29 @@ def jacobi(
     aproxNuevas = [[0], [0], [0]]
     iteracion = 0
 
+    historial = {
+        "Incognitas": [x0.reshape(-1)],  # type: ignore
+        "Error": [None]
+    }
+
     while iteracion < maxiter:
         aproxNuevas = np.dot(np.linalg.inv(
-            D), b - np.dot(R, mIncognitas[iteracion]))
+            D), b - np.dot(R, mIncognitas[iteracion]))  # type: ignore
         mIncognitas = np.insert(
             mIncognitas, iteracion + 1, aproxNuevas, axis=0)
         iteracion = iteracion + 1
-
         E = np.linalg.norm(mIncognitas[iteracion] - mIncognitas[iteracion - 1])
+
+        if tabulate:
+            historial["Incognitas"].append(aproxNuevas.reshape(-1))
+            historial["Error"].append(E)
+
         if E < tol:
             break
 
     vectorSolucion = mIncognitas[iteracion]
+
+    if tabulate:
+        tabulate_output(historial)
 
     return vectorSolucion
