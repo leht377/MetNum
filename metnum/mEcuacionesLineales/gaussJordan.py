@@ -20,8 +20,8 @@ def gaussJordan(A: list | ndarray, b: list | ndarray) -> ndarray:
     Retorna
     ---------
 
-    x: list[float]
-          Vector con la solucion aproximada al sistema de ecuaciones Ax=b
+    x: ndarray
+        Vector con la solucion aproximada al sistema de ecuaciones Ax=b
 
     Ejemplo
     ---------

@@ -33,7 +33,7 @@ def jacobi(
 
     Retorna
     ------------
-    vectorSolucion: list 
+    x: list 
        El vector x que satisface el sistema de ecuaciones lineales Ax = b
 
     Ejemplos
@@ -94,9 +94,9 @@ def jacobi(
         if E < tol:
             break
 
-    vectorSolucion = mIncognitas[iteracion]
+    x = mIncognitas[iteracion]
 
     if tabulate:
         tabulate_output(historial)
 
-    return vectorSolucion
+    return x
