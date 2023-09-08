@@ -1,7 +1,6 @@
 <div style="display:flex; justify-content: start">
-  <img src="https://github.com/leht377/pagina_web/blob/master/Logo.png?raw=true" alt="Screenshot of metnum" width="400px">
+  <img src="https://github.com/leht377/pagina_web/blob/master/Logo.png?raw=true" alt="Screenshot of metnum" width="420px">
 </div>
-
 
 MetNum es una libreria de métodos numéricos, los métodos numéricos son una herramienta esencial para los científicos y matemáticos que necesitan resolver problemas que no se pueden resolver mediante métodos analíticos tradicionales. En lugar de obtener soluciones exactas, los métodos numéricos utilizan cálculos aproximados para encontrar soluciones que se acercan lo suficiente a la respuesta real.
 
