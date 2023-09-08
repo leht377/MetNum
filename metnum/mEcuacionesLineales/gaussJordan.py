@@ -20,7 +20,7 @@ def gaussJordan(A: list | ndarray, b: list | ndarray) -> ndarray:
     Retorna
     ---------
 
-    bx: list[float]
+    x: list[float]
           Vector con la solucion aproximada al sistema de ecuaciones Ax=b
 
     Ejemplo
@@ -64,16 +64,16 @@ def gaussJordan(A: list | ndarray, b: list | ndarray) -> ndarray:
         columnaActual = columnaActual + 1
 
     Ax = matrizAumentada[:, :nColumnas]
-    bx = matrizAumentada[:, nColumnas:]
+    x = matrizAumentada[:, nColumnas:]
 
     while nFilas > 0:
         # Se extrea la lista de las inconitas ya encontradas
-        xi = bx[nFilas:]
+        xi = x[nFilas:]
         # Se multiplica  las incognitas ya encontradas  en las filas para hallar el resto de ellas
         mul = np.dot(Ax[nFilas - 1, nFilas:], xi)
 
         # Se despeja el resultado para encontra el valor de la incognita xi
-        bx[nFilas - 1] = bx[nFilas - 1] + (mul * -1)
+        x[nFilas - 1] = x[nFilas - 1] + (mul * -1)
         nFilas = nFilas - 1
 
-    return bx
+    return x
