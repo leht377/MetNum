@@ -3,18 +3,18 @@ from setuptools import find_packages, setup
 
 HERE = pathlib.Path(__file__).parent
 
-VERSION = "0.0.1"
+VERSION = "1.0.0"
 PACKAGE_NAME = "metnum"
 AUTHOR = "DIEGO ALEJANDRO ESPINEL B , LUIS EDUARDO HERNANDEZ T"
 AUTHOR_EMAIL = "XXX@gmail.com"
 URL = "https://github.com/leht377/metnum_base.git"
 
 LICENSE = "MIT"
-DESCRIPTION = "Aquí debes incluir una descripción corta de la librería"
+DESCRIPTION = "MetNum es una libreria de métodos numéricos, los métodos numéricos son una herramienta esencial para los científicos y matemáticos que necesitan resolver problemas que no se pueden resolver mediante métodos analíticos tradicionales. En lugar de obtener soluciones exactas, los métodos numéricos utilizan cálculos aproximados para encontrar soluciones que se acercan lo suficiente a la respuesta real."
 LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding="utf-8")
 LONG_DESC_TYPE = "text/markdown"
 
-INSTALL_REQUIRES = ["numpy", "matplotlib"]
+INSTALL_REQUIRES = ["numpy", "matplotlib", "tabulate"]
 
 setup(
     name=PACKAGE_NAME,

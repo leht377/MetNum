@@ -6,3 +6,5 @@ dist
 build
 install.py
 test.csv
+.vscode
+.pytest_cache
